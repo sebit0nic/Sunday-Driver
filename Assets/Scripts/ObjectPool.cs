@@ -5,14 +5,12 @@ using System.Collections.Generic;
 public class ObjectPool : ScriptableObject {
 
 	private GameObject pooledObject;
-	private int pooledAmount;
 	private bool willGrow;
 
 	private List<GameObject> pooledObjects;
 
 	public ObjectPool(GameObject pooledObject, int pooledAmount, bool willGrow) {
 		this.pooledObject = pooledObject;
-		this.pooledAmount = pooledAmount;
 		this.willGrow = willGrow;
 
 		pooledObjects = new List<GameObject> ();
