@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Road : MonoBehaviour {
+public class MoveableScript : MonoBehaviour {
 
 	public float moveSpeed = 1;
 

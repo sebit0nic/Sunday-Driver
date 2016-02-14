@@ -1,27 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RoadSpawner : MonoBehaviour {
+public class TrafficSpawner : MonoBehaviour {
 
-	public GameObject road;
+	public GameObject traffic;
 	public float spawnInterval = 1;
 	private float timer;
 	private ObjectPool objectPool;
 
 	private void Start() {
-		objectPool = new ObjectPool (road, 7, false);
-
-		for (int i = 0; i < 4; i++) {
-			GameObject obj = objectPool.GetPooledObject ();
-			obj.transform.position = new Vector3 (0, 0, -10 * i);
-			obj.SetActive (true);
-		}
+		objectPool = new ObjectPool (traffic, 20, false);
 	}
 
 	private void Update() {
+		int randomLocation = Random.Range (-1, 2);
 		if (timer >= spawnInterval) {
 			GameObject obj = objectPool.GetPooledObject ();
-			obj.transform.position = transform.position;
+			obj.transform.position = new Vector3 (1.5f * randomLocation, transform.position.y, transform.position.z); 
 			obj.SetActive (true);
 			timer = 0;
 		}
