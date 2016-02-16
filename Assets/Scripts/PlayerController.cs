@@ -59,4 +59,9 @@ public class PlayerController : MonoBehaviour {
 		startTime = Time.time;
 		journeyLength = Vector3.Distance(transform.position, new Vector3(1.5f * position, 0, 0));
 	}
+
+	public void Reset() {
+		position = 0;
+		transform.position = Vector3.zero;
+	}
 }

@@ -24,4 +24,8 @@ public class TrafficSpawner : MonoBehaviour {
 		}
 		timer += Time.deltaTime;
 	}
+
+	public void Reset() {
+		timer = 0;
+	}
 }

@@ -30,4 +30,11 @@ public class RoadSpawner : MonoBehaviour {
 		}
 		timer += Time.deltaTime;
 	}
+
+	public void Reset() {
+		timer = 0;
+		for (int i = 0; i < 4; i++) {
+			Instantiate (road, new Vector3 (0, 0, -10 * i), Quaternion.identity);
+		}
+	}
 }
