@@ -10,11 +10,11 @@ public class PlayerController : MonoBehaviour {
 	private float startTime;
 	private float journeyLength;
 
-	private void Update() {
-		timer += Time.deltaTime;
-	}
+	private Vector2 touchOriginPosition, touchEndPosition;
 
 	private void FixedUpdate() {
+		timer += Time.deltaTime;
+
 		//PC
 		if (Input.GetAxis ("Horizontal") < 0 && position < 1 && timer >= inputDelay) {
 			position++;
@@ -27,16 +27,24 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//Mobile
-		if (Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Moved && timer >= inputDelay) {
-			Vector2 touchDeltaPosition = Input.GetTouch (0).deltaPosition;
-			if (touchDeltaPosition.x < -2 && position < 1) {
-				position++;
-				timer = 0;
-				SetLerpValues ();
-			} else if (touchDeltaPosition.x > 2 && position > -1) {
-				position--;
-				timer = 0;
-				SetLerpValues ();
+		if (Input.touchCount > 0) {
+			switch (Input.GetTouch (0).phase) {
+			case TouchPhase.Began:
+				touchOriginPosition = Input.GetTouch (0).position;
+				touchEndPosition = Input.GetTouch (0).position;
+				break;
+			case TouchPhase.Ended:
+				touchEndPosition = Input.GetTouch (0).position;
+				if (touchOriginPosition.x - touchEndPosition.x > 0 && position < 1) {
+					position++;
+					timer = 0;
+					SetLerpValues ();
+				} else if (touchOriginPosition.x - touchEndPosition.x < 0 && position > -1) {
+					position--;
+					timer = 0;
+					SetLerpValues ();
+				}
+				break;
 			}
 		}
 

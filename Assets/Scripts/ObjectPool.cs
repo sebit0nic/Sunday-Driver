@@ -9,7 +9,7 @@ public class ObjectPool : ScriptableObject {
 
 	private List<GameObject> pooledObjects;
 
-	public ObjectPool(GameObject pooledObject, int pooledAmount, bool willGrow) {
+	public void Init(GameObject pooledObject, int pooledAmount, bool willGrow) {
 		this.pooledObject = pooledObject;
 		this.willGrow = willGrow;
 
