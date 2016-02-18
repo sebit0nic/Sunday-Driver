@@ -10,9 +10,9 @@ public class PlayerController : MonoBehaviour {
 	private float startTime;
 	private float journeyLength;
 
-	private Vector2 touchOriginPosition, touchEndPosition;
+	private Vector2 fp, lp;
 
-	private void FixedUpdate() {
+	private void Update() {
 		timer += Time.deltaTime;
 
 		//PC
@@ -28,23 +28,22 @@ public class PlayerController : MonoBehaviour {
 
 		//Mobile
 		if (Input.touchCount > 0) {
-			switch (Input.GetTouch (0).phase) {
-			case TouchPhase.Began:
-				touchOriginPosition = Input.GetTouch (0).position;
-				touchEndPosition = Input.GetTouch (0).position;
-				break;
-			case TouchPhase.Ended:
-				touchEndPosition = Input.GetTouch (0).position;
-				if (touchOriginPosition.x - touchEndPosition.x > 0 && position < 1) {
+			Touch touch = Input.GetTouch (0);
+			if (touch.phase == TouchPhase.Began) {
+				fp = touch.position;
+				lp = touch.position;
+			}
+			if (touch.phase == TouchPhase.Moved) {
+				lp = touch.position;
+			}
+			if (touch.phase == TouchPhase.Ended) {
+				if ((fp.x - lp.x) > 50 && position < 1) {
 					position++;
-					timer = 0;
 					SetLerpValues ();
-				} else if (touchOriginPosition.x - touchEndPosition.x < 0 && position > -1) {
+				} else if ((fp.x - lp.x) < -50 && position > -1) {
 					position--;
-					timer = 0;
 					SetLerpValues ();
 				}
-				break;
 			}
 		}
 
