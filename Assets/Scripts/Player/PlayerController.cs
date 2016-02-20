@@ -50,17 +50,17 @@ public class PlayerController : MonoBehaviour {
 		if (journeyLength != 0) {
 			float distCovered = (Time.time - startTime) * speed;
 			float fracJourney = distCovered / journeyLength;
-			transform.position = Vector3.Lerp(transform.position, new Vector3(1.5f * position, 0, 0), fracJourney);
+			transform.position = Vector3.Lerp(transform.position, new Vector3(1.5f * position, 0.25f, 0), fracJourney);
 		}
 	}
 
 	private void SetLerpValues() {
 		startTime = Time.time;
-		journeyLength = Vector3.Distance(transform.position, new Vector3(1.5f * position, 0, 0));
+		journeyLength = Vector3.Distance(transform.position, new Vector3(1.5f * position, 0.25f, 0));
 	}
 
 	public void Reset() {
 		position = 0;
-		transform.position = Vector3.zero;
+		transform.position = new Vector3(0, 0.25f, 0);
 	}
 }

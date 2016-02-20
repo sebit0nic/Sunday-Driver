@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerCollision : MonoBehaviour {
 
 	public RoadSpawner roadSpawner;
-	public TrafficSpawner trafficSpawner;
+	public TrafficSpawner[] trafficSpawner;
 	public Score score;
 	private PlayerController playerController;
 
@@ -28,7 +28,9 @@ public class PlayerCollision : MonoBehaviour {
 			Destroy (destroyableObjects [i]);
 		}
 		roadSpawner.Reset ();
-		trafficSpawner.Reset ();
+		for (int i = 0; i < trafficSpawner.Length; i++) {
+			trafficSpawner[i].Reset ();
+		}
 		playerController.Reset ();
 		score.Reset ();
 	}

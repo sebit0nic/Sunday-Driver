@@ -8,7 +8,7 @@ public class RoadSpawner : MonoBehaviour {
 	private float timer;
 
 	private void Start() {
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			Instantiate (road, new Vector3 (0, 0, -10 * i), Quaternion.identity);
 		}
 	}
@@ -23,7 +23,7 @@ public class RoadSpawner : MonoBehaviour {
 
 	public void Reset() {
 		timer = 0;
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < 5; i++) {
 			Instantiate (road, new Vector3 (0, 0, -10 * i), Quaternion.identity);
 		}
 	}

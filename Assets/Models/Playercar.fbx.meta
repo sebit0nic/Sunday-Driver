@@ -1,0 +1,123 @@
+fileFormatVersion: 2
+guid: 00dfa6900eddbcb42b88bd44b876887e
+timeCreated: 1455995770
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Base
+    100002: Left Back Tire
+    100004: Left Backlight
+    100006: Left Front Tire
+    100008: Left Frontlight
+    100010: //RootNode
+    100012: Right Back Tire
+    100014: Right Backlight
+    100016: Right Front Tire
+    100018: Right Frontlight
+    100020: Top
+    400000: Base
+    400002: Left Back Tire
+    400004: Left Backlight
+    400006: Left Front Tire
+    400008: Left Frontlight
+    400010: //RootNode
+    400012: Right Back Tire
+    400014: Right Backlight
+    400016: Right Front Tire
+    400018: Right Frontlight
+    400020: Top
+    2300000: Base
+    2300002: Left Back Tire
+    2300004: Left Backlight
+    2300006: Left Front Tire
+    2300008: Left Frontlight
+    2300010: Right Back Tire
+    2300012: Right Backlight
+    2300014: Right Front Tire
+    2300016: Right Frontlight
+    2300018: Top
+    3300000: Base
+    3300002: Left Back Tire
+    3300004: Left Backlight
+    3300006: Left Front Tire
+    3300008: Left Frontlight
+    3300010: Right Back Tire
+    3300012: Right Backlight
+    3300014: Right Front Tire
+    3300016: Right Frontlight
+    3300018: Top
+    4300000: Right Backlight
+    4300002: Left Backlight
+    4300004: Right Frontlight
+    4300006: Left Frontlight
+    4300008: Right Front Tire
+    4300010: Right Back Tire
+    4300012: Left Back Tire
+    4300014: Left Front Tire
+    4300016: Top
+    4300018: Base
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 0
+    normalImportMode: 1
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

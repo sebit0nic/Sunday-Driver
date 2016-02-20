@@ -3,17 +3,27 @@ using System.Collections;
 
 public class TrafficSpawner : MonoBehaviour {
 
-	public GameObject traffic;
-	public float spawnInterval = 1;
+	public MoveableScript traffic;
+	public bool canSpawn = true;
+	public float minSpawnInterval = 1, maxSpawnInterval = 1;
+	public int minTrafficSpeed = 1, maxTrafficSpeed = 1;
+	private float spawnInterval;
 	private float timer;
 
+	private void Start() {
+		spawnInterval = Random.Range (minSpawnInterval, maxSpawnInterval);
+	}
+
 	private void Update() {
-		int randomLocation = Random.Range (-1, 2);
-		if (timer >= spawnInterval) {
-			Instantiate (traffic, new Vector3 (1.5f * randomLocation, transform.position.y, transform.position.z), Quaternion.identity);
-			timer = 0;
+		if (canSpawn) {
+			if (timer >= spawnInterval) {
+				MoveableScript trafficInstance = Instantiate (traffic, transform.position, Quaternion.identity) as MoveableScript;
+				trafficInstance.Init (minTrafficSpeed, maxTrafficSpeed);
+				timer = 0;
+				spawnInterval = Random.Range (minSpawnInterval, maxSpawnInterval);
+			}
+			timer += Time.deltaTime;
 		}
-		timer += Time.deltaTime;
 	}
 
 	public void Reset() {
