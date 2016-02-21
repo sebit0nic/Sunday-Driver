@@ -3,7 +3,8 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	private int position = 0;
+	private int position = 1;
+	private int maxPosition = 2, minPosition = 0;
 	private float inputDelay = 0.2f, timer;
 
 	public float speed = 1;
@@ -16,11 +17,11 @@ public class PlayerController : MonoBehaviour {
 		timer += Time.deltaTime;
 
 		//PC
-		if (Input.GetAxis ("Horizontal") < 0 && position < 1 && timer >= inputDelay) {
+		if (Input.GetAxis ("Horizontal") < 0 && position < maxPosition && timer >= inputDelay) {
 			position++;
 			timer = 0;
 			SetLerpValues ();
-		} else if (Input.GetAxis ("Horizontal") > 0 && position > -1 && timer >= inputDelay) {
+		} else if (Input.GetAxis ("Horizontal") > 0 && position > minPosition && timer >= inputDelay) {
 			position--;
 			timer = 0;
 			SetLerpValues ();
@@ -37,10 +38,10 @@ public class PlayerController : MonoBehaviour {
 				lp = touch.position;
 			}
 			if (touch.phase == TouchPhase.Ended) {
-				if ((fp.x - lp.x) > 50 && position < 1) {
+				if ((fp.x - lp.x) > 50 && position < maxPosition) {
 					position++;
 					SetLerpValues ();
-				} else if ((fp.x - lp.x) < -50 && position > -1) {
+				} else if ((fp.x - lp.x) < -50 && position > minPosition) {
 					position--;
 					SetLerpValues ();
 				}
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void Reset() {
-		position = 0;
-		transform.position = new Vector3(0, 0.25f, 0);
+		position = 1;
+		transform.position = new Vector3(1.5f, 0.25f, 0);
 	}
 }

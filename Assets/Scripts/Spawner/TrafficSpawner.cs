@@ -3,7 +3,7 @@ using System.Collections;
 
 public class TrafficSpawner : MonoBehaviour {
 
-	public MoveableScript traffic;
+	public Traffic traffic;
 	public bool canSpawn = true;
 	public float minSpawnInterval = 1, maxSpawnInterval = 1;
 	public int minTrafficSpeed = 1, maxTrafficSpeed = 1;
@@ -17,7 +17,7 @@ public class TrafficSpawner : MonoBehaviour {
 	private void Update() {
 		if (canSpawn) {
 			if (timer >= spawnInterval) {
-				MoveableScript trafficInstance = Instantiate (traffic, transform.position, Quaternion.identity) as MoveableScript;
+				Traffic trafficInstance = Instantiate (traffic, transform.position, traffic.transform.rotation) as Traffic;
 				trafficInstance.Init (minTrafficSpeed, maxTrafficSpeed);
 				timer = 0;
 				spawnInterval = Random.Range (minSpawnInterval, maxSpawnInterval);

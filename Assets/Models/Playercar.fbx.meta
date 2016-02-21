@@ -1,62 +1,37 @@
 fileFormatVersion: 2
-guid: 00dfa6900eddbcb42b88bd44b876887e
-timeCreated: 1455995770
+guid: 65e45f1c5542f674f83082c970292a37
+timeCreated: 1456056454
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Base
-    100002: Left Back Tire
-    100004: Left Backlight
-    100006: Left Front Tire
-    100008: Left Frontlight
+    100000: Back Left Tire
+    100002: Back Right Tire
+    100004: Car
+    100006: Front Left Tire
+    100008: Front Right Tire
     100010: //RootNode
-    100012: Right Back Tire
-    100014: Right Backlight
-    100016: Right Front Tire
-    100018: Right Frontlight
-    100020: Top
-    400000: Base
-    400002: Left Back Tire
-    400004: Left Backlight
-    400006: Left Front Tire
-    400008: Left Frontlight
+    400000: Back Left Tire
+    400002: Back Right Tire
+    400004: Car
+    400006: Front Left Tire
+    400008: Front Right Tire
     400010: //RootNode
-    400012: Right Back Tire
-    400014: Right Backlight
-    400016: Right Front Tire
-    400018: Right Frontlight
-    400020: Top
-    2300000: Base
-    2300002: Left Back Tire
-    2300004: Left Backlight
-    2300006: Left Front Tire
-    2300008: Left Frontlight
-    2300010: Right Back Tire
-    2300012: Right Backlight
-    2300014: Right Front Tire
-    2300016: Right Frontlight
-    2300018: Top
-    3300000: Base
-    3300002: Left Back Tire
-    3300004: Left Backlight
-    3300006: Left Front Tire
-    3300008: Left Frontlight
-    3300010: Right Back Tire
-    3300012: Right Backlight
-    3300014: Right Front Tire
-    3300016: Right Frontlight
-    3300018: Top
-    4300000: Right Backlight
-    4300002: Left Backlight
-    4300004: Right Frontlight
-    4300006: Left Frontlight
-    4300008: Right Front Tire
-    4300010: Right Back Tire
-    4300012: Left Back Tire
-    4300014: Left Front Tire
-    4300016: Top
-    4300018: Base
+    2300000: Back Left Tire
+    2300002: Back Right Tire
+    2300004: Car
+    2300006: Front Left Tire
+    2300008: Front Right Tire
+    3300000: Back Left Tire
+    3300002: Back Right Tire
+    3300004: Car
+    3300006: Front Left Tire
+    3300008: Front Right Tire
+    4300000: Front Right Tire
+    4300002: Back Right Tire
+    4300004: Back Left Tire
+    4300006: Front Left Tire
+    4300008: Car
   materials:
     importMaterials: 1
     materialName: 0
@@ -81,7 +56,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.3
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -97,8 +72,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 0
-    normalImportMode: 1
+    normalSmoothAngle: 60
+    normalImportMode: 0
     tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
