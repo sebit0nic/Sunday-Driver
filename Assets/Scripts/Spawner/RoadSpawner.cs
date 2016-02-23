@@ -11,14 +11,14 @@ public class RoadSpawner : MonoBehaviour {
 		for (int i = 0; i < 5; i++) {
 			Instantiate (road, new Vector3 (0, 0, -10 * i), Quaternion.identity);
 		}
+		timer = Time.time + spawnInterval;
 	}
 
 	private void Update() {
-		if (timer >= spawnInterval) {
+		if (timer < Time.time) {
 			Instantiate (road, transform.position, Quaternion.identity);
-			timer = 0;
+			timer = Time.time + spawnInterval;
 		}
-		timer += Time.deltaTime;
 	}
 
 	public void Reset() {
