@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Score : MonoBehaviour {
 
-	private int score = 0;
+	private int score = 0, lastScore = 0;
 	private float floatScore = 0;
 	private Text scoreText;
 
@@ -15,7 +15,10 @@ public class Score : MonoBehaviour {
 	private void Update() {
 		floatScore += Time.deltaTime;
 		score = Mathf.RoundToInt (floatScore);
-		scoreText.text = "Score: " + score;
+		if (score > lastScore) {
+			scoreText.text = "Score: " + score;
+			lastScore = score;
+		}
 	}
 
 	public void Reset() {

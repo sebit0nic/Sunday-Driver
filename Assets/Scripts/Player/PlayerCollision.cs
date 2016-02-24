@@ -21,11 +21,13 @@ public class PlayerCollision : MonoBehaviour {
 	private void OnGameOver() {
 		GameObject[] destroyableObjects = GameObject.FindGameObjectsWithTag ("Traffic");
 		for (int i = 0; i < destroyableObjects.Length; i++) {
-			Destroy (destroyableObjects [i]);
+			//Destroy (destroyableObjects [i]);
+			destroyableObjects[i].SetActive(false);
 		}
 		destroyableObjects = GameObject.FindGameObjectsWithTag ("Road");
 		for (int i = 0; i < destroyableObjects.Length; i++) {
-			Destroy (destroyableObjects [i]);
+			//Destroy (destroyableObjects [i]);
+			destroyableObjects[i].SetActive(false);
 		}
 		roadSpawner.Reset ();
 		for (int i = 0; i < trafficSpawner.Length; i++) {
