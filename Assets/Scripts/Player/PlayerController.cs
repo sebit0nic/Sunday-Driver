@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour {
 
 	private Vector2 fp, lp;
 
+	private Animator animator;
+
+	private void Start() {
+		animator = GetComponent<Animator> ();
+	}
+
 	private void Update() {
 		timer += Time.deltaTime;
 
@@ -21,10 +27,12 @@ public class PlayerController : MonoBehaviour {
 			position++;
 			timer = 0;
 			SetLerpValues ();
+			animator.SetTrigger ("OnSteerLeft");
 		} else if (Input.GetAxis ("Horizontal") > 0 && position > minPosition && timer >= inputDelay) {
 			position--;
 			timer = 0;
 			SetLerpValues ();
+			animator.SetTrigger ("OnSteerRight");
 		}
 
 		//Mobile
@@ -41,9 +49,11 @@ public class PlayerController : MonoBehaviour {
 				if ((fp.x - lp.x) > 50 && position < maxPosition) {
 					position++;
 					SetLerpValues ();
+					animator.SetTrigger ("OnSteerLeft");
 				} else if ((fp.x - lp.x) < -50 && position > minPosition) {
 					position--;
 					SetLerpValues ();
+					animator.SetTrigger ("OnSteerRight");
 				}
 			}
 		}
