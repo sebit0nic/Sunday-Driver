@@ -5,8 +5,8 @@ public class Traffic : MonoBehaviour {
 
 	private int moveSpeed;
 
-	public void Init(int minMoveSpeed, int maxMoveSpeed) {
-		moveSpeed = Random.Range (minMoveSpeed, maxMoveSpeed);
+	public void Init(int moveSpeed) {
+		this.moveSpeed = moveSpeed;
 	}
 
 	private void Update() {

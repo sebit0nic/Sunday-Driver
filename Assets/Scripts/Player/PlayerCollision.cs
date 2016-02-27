@@ -4,12 +4,13 @@ using System.Collections;
 public class PlayerCollision : MonoBehaviour {
 
 	public RoadSpawner roadSpawner;
-	public TrafficSpawner[] trafficSpawner;
 	public Score score;
 	private PlayerController playerController;
+	private TrafficSpawnManager tsm;
 
 	private void Start() {
 		playerController = GetComponent<PlayerController> ();
+		tsm = GameObject.Find ("Traffic Spawn Manager").GetComponent<TrafficSpawnManager> ();
 	}
 
 	private void OnTriggerEnter(Collider other) {
@@ -21,18 +22,14 @@ public class PlayerCollision : MonoBehaviour {
 	private void OnGameOver() {
 		GameObject[] destroyableObjects = GameObject.FindGameObjectsWithTag ("Traffic");
 		for (int i = 0; i < destroyableObjects.Length; i++) {
-			//Destroy (destroyableObjects [i]);
 			destroyableObjects[i].SetActive(false);
+			tsm.DecreaseCurrentTrafficCount ();
 		}
 		destroyableObjects = GameObject.FindGameObjectsWithTag ("Road");
 		for (int i = 0; i < destroyableObjects.Length; i++) {
-			//Destroy (destroyableObjects [i]);
 			destroyableObjects[i].SetActive(false);
 		}
 		roadSpawner.Reset ();
-		for (int i = 0; i < trafficSpawner.Length; i++) {
-			trafficSpawner[i].Reset ();
-		}
 		playerController.Reset ();
 		score.Reset ();
 	}

@@ -5,36 +5,19 @@ public class TrafficSpawner : MonoBehaviour {
 
 	public GameObject traffic;
 	public bool canSpawn = true;
-	public float minSpawnInterval = 1, maxSpawnInterval = 1;
-	public int minTrafficSpeed = 1, maxTrafficSpeed = 1;
-	private float spawnInterval;
-	private float timer;
 	private ObjectPool pool;
 
 	private void Start() {
-		spawnInterval = Random.Range (minSpawnInterval, maxSpawnInterval);
 		pool = ObjectPool.CreateInstance<ObjectPool> ();
 		pool.Init (traffic, 30, true);
 	}
 
-	private void Update() {
+	public void Spawn (int moveSpeed) {
 		if (canSpawn) {
-			if (timer >= spawnInterval) {
-				/*Traffic trafficInstance = Instantiate (traffic, transform.position, traffic.transform.rotation) as Traffic;
-				trafficInstance.Init (minTrafficSpeed, maxTrafficSpeed);*/
-				Traffic trafficInstance = pool.GetPooledObject ().GetComponent<Traffic> ();
-				trafficInstance.transform.position = transform.position;
-				trafficInstance.Init (minTrafficSpeed, maxTrafficSpeed);
-				trafficInstance.gameObject.SetActive (true);
-
-				timer = 0;
-				spawnInterval = Random.Range (minSpawnInterval, maxSpawnInterval);
-			}
-			timer += Time.deltaTime;
+			Traffic trafficInstance = pool.GetPooledObject ().GetComponent<Traffic> ();
+			trafficInstance.transform.position = transform.position;
+			trafficInstance.Init (moveSpeed);
+			trafficInstance.gameObject.SetActive (true);
 		}
-	}
-
-	public void Reset() {
-		timer = 0;
 	}
 }
