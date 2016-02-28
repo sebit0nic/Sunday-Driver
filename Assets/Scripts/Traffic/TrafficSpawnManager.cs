@@ -43,4 +43,11 @@ public class TrafficSpawnManager : MonoBehaviour {
 	public void DecreaseCurrentTrafficCount() {
 		currentTrafficCount--;
 	}
+
+	public void Reset() {
+		currentTrafficCount = 0;
+		for (int i = 0; i < nextSpawn.Length; i++) {
+			nextSpawn [i] = 0;
+		}
+	}
 }

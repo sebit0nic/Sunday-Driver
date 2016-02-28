@@ -23,7 +23,6 @@ public class PlayerCollision : MonoBehaviour {
 		GameObject[] destroyableObjects = GameObject.FindGameObjectsWithTag ("Traffic");
 		for (int i = 0; i < destroyableObjects.Length; i++) {
 			destroyableObjects[i].SetActive(false);
-			tsm.DecreaseCurrentTrafficCount ();
 		}
 		destroyableObjects = GameObject.FindGameObjectsWithTag ("Road");
 		for (int i = 0; i < destroyableObjects.Length; i++) {
@@ -32,5 +31,6 @@ public class PlayerCollision : MonoBehaviour {
 		roadSpawner.Reset ();
 		playerController.Reset ();
 		score.Reset ();
+		tsm.Reset ();
 	}
 }

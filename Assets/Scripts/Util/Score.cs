@@ -16,15 +16,15 @@ public class Score : MonoBehaviour {
 		floatScore += Time.deltaTime;
 		score = Mathf.RoundToInt (floatScore);
 		if (score > lastScore) {
-			scoreText.text = "Score: " + score;
+			scoreText.text = score.ToString ();
 			lastScore = score;
 		}
 	}
 
 	public void Reset() {
 		score = 0;
-		floatScore = 0;
-		scoreText.text = "Score: 0";
 		lastScore = 0;
+		floatScore = 0;
+		scoreText.text = "0m";
 	}
 }
