@@ -4,37 +4,33 @@ using System.Collections;
 public class RoadSpawner : MonoBehaviour {
 
 	public GameObject road;
-	public float spawnInterval = 1;
-	private float timer;
 	private ObjectPool pool;
+	private GameObject lastSpawnedObject;
 
 	private void Start() {
 		pool = ObjectPool.CreateInstance<ObjectPool> ();
 		pool.Init (road, 10, true);
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 4; i++) {
 			GameObject pooledObject = pool.GetPooledObject();
-			pooledObject.transform.position = new Vector3 (0, 0, -10 * i);
+			pooledObject.transform.position = new Vector3 (0, 0, -30 * i);
 			pooledObject.SetActive (true);
+			lastSpawnedObject = pooledObject;
 		}
-		timer = Time.time + spawnInterval;
 	}
 
-	private void Update() {
-		if (timer < Time.time) {
-			GameObject pooledObject = pool.GetPooledObject();
-			pooledObject.transform.position = transform.position;
-			pooledObject.SetActive (true);
-
-			timer = Time.time + spawnInterval;
-		}
+	public void Spawn() {
+		GameObject pooledObject = pool.GetPooledObject();
+		pooledObject.transform.position = new Vector3 (transform.position.x, transform.position.y, lastSpawnedObject.transform.position.z - 30);
+		pooledObject.SetActive (true);
+		lastSpawnedObject = pooledObject;
 	}
 
 	public void Reset() {
-		timer = 0;
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 4; i++) {
 			GameObject pooledObject = pool.GetPooledObject();
-			pooledObject.transform.position = new Vector3 (0, 0, -10 * i);
+			pooledObject.transform.position = new Vector3 (0, 0, -30 * i);
 			pooledObject.SetActive (true);
+			lastSpawnedObject = pooledObject;
 		}
 	}
 }

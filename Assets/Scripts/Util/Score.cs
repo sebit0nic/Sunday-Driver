@@ -25,6 +25,6 @@ public class Score : MonoBehaviour {
 		score = 0;
 		lastScore = 0;
 		floatScore = 0;
-		scoreText.text = "0m";
+		scoreText.text = "0";
 	}
 }
