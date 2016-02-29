@@ -74,4 +74,12 @@ public class PlayerController : MonoBehaviour {
 		position = 1;
 		transform.position = new Vector3(1.5f, 0.25f, 0);
 	}
+
+	public void IncreaseMaxPosition() {
+		maxPosition++;
+	}
+
+	public void DecreaseMaxPosition() {
+		maxPosition--;
+	}
 }

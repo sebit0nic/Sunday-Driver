@@ -46,8 +46,19 @@ public class TrafficSpawnManager : MonoBehaviour {
 
 	public void Reset() {
 		currentTrafficCount = 0;
+		allowedPositions = 3;
 		for (int i = 0; i < nextSpawn.Length; i++) {
 			nextSpawn [i] = 0;
 		}
+	}
+
+	public void IncreaseAllowedPositions() {
+		allowedPositions++;
+		trafficSpawner [allowedPositions - 1].SetCanSpawn (true);
+	}
+
+	public void DecreaseAllowedPositions() {
+		allowedPositions--;
+		trafficSpawner [allowedPositions].SetCanSpawn (false);
 	}
 }

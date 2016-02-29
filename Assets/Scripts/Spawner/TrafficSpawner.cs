@@ -20,4 +20,8 @@ public class TrafficSpawner : MonoBehaviour {
 			trafficInstance.gameObject.SetActive (true);
 		}
 	}
+
+	public void SetCanSpawn(bool canSpawn) {
+		this.canSpawn = canSpawn;
+	}
 }
