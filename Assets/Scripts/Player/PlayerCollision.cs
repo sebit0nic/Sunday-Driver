@@ -18,7 +18,7 @@ public class PlayerCollision : MonoBehaviour {
 			OnGameOver ();
 		}
 		if (other.gameObject.tag.Equals ("Road")) {
-			if (other.gameObject.name.Equals ("Road 3T4(Clone)")) {
+			if (other.gameObject.name.Equals ("Road 3T4(Clone)") || other.gameObject.name.Equals("Road 4T5(Clone)")) {
 				playerController.IncreaseMaxPosition();
 				tsm.IncreaseAllowedPositions ();
 			}

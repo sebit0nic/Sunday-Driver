@@ -72,6 +72,7 @@ public class PlayerController : MonoBehaviour {
 
 	public void Reset() {
 		position = 1;
+		maxPosition = 2;
 		transform.position = new Vector3(1.5f, 0.25f, 0);
 	}
 
