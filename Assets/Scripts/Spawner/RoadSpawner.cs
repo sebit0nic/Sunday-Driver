@@ -11,6 +11,8 @@ public class RoadSpawner : MonoBehaviour {
 	private bool transitioningPlus = false, transitioningMinus = false;
 	private float transitionTimer;
 
+	private bool playing = false;
+
 	private void Start() {
 		pool3L = ObjectPool.CreateInstance<ObjectPool> ();
 		pool3L.Init (road3L, 5, true);
@@ -70,10 +72,17 @@ public class RoadSpawner : MonoBehaviour {
 		pooledObject.SetActive (true);
 		lastSpawnedObject = pooledObject;
 
-		if (transitionTimer < Time.time) {
-			transitioningPlus = true;
-			transitionTimer = Time.time + 5;
+		if (playing) {
+			if (transitionTimer < Time.time && lanes < 5) {
+				transitioningPlus = true;
+				transitionTimer = Time.time + 5;
+			}
 		}
+	}
+
+	public void StartSpawning() {
+		transitionTimer = Time.time + 5;
+		playing = true;
 	}
 
 	public void Reset() {

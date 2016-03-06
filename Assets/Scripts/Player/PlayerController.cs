@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour {
 
 	private void Update() {
 		timer += Time.deltaTime;
-
 		//PC
 		if (Input.GetAxis ("Horizontal") < 0 && position < maxPosition && timer >= inputDelay) {
 			position++;
