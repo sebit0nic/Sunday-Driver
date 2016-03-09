@@ -4,7 +4,8 @@ using System.Collections;
 public class Traffic : MonoBehaviour {
 
 	public GameObject[] carModels;
-	public Material[] paintJobs;
+	public Material paintJobs;
+	private Material instantiatedMaterial;
 	private MeshRenderer meshRenderer;
 	private GameObject[] instantiatedCarModels;
 	private int moveSpeed;
@@ -13,6 +14,7 @@ public class Traffic : MonoBehaviour {
 
 	private void Awake() {
 		instantiatedCarModels = new GameObject[20];
+		instantiatedMaterial = Instantiate (paintJobs) as Material;
 		for (int i = 0; i < carModels.Length; i++) {
 			instantiatedCarModels [i] = Instantiate (carModels [i], Vector3.zero, Quaternion.identity) as GameObject;
 			instantiatedCarModels [i].transform.Rotate (0, 180, 0);
@@ -33,7 +35,8 @@ public class Traffic : MonoBehaviour {
 		int random = Random.Range (0, carModels.Length);
 		instantiatedCarModels [random].SetActive (true);
 		meshRenderer = instantiatedCarModels [random].GetComponentInChildren<MeshRenderer> ();
-		meshRenderer.material = paintJobs [Random.Range (0, paintJobs.Length)];
+		instantiatedMaterial.SetTextureOffset ("_MainTex", new Vector2 (Random.Range(0f, 1f), Random.Range(0f, 1f)));
+		meshRenderer.material = instantiatedMaterial;
 	}
 
 	private void Update() {
