@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour {
 	private int position = 1;
 	private int maxPosition = 2, minPosition = 0;
 	private float inputDelay = 0.2f, timer;
+	private Vector3 initialPosition;
+	private Quaternion initialRotation;
 
 	public float speed = 1;
 	private float startTime;
@@ -15,8 +17,10 @@ public class PlayerController : MonoBehaviour {
 
 	private Animator animator;
 
-	private void Start() {
+	private void Awake() {
 		animator = GetComponent<Animator> ();
+		initialPosition = transform.position;
+		initialRotation = transform.rotation;
 	}
 
 	private void Update() {
@@ -72,7 +76,8 @@ public class PlayerController : MonoBehaviour {
 	public void Reset() {
 		position = 1;
 		maxPosition = 2;
-		transform.position = new Vector3(1.5f, 0.25f, 0);
+		transform.position = initialPosition;
+		transform.rotation = initialRotation;
 	}
 
 	public void IncreaseMaxPosition() {
@@ -81,5 +86,9 @@ public class PlayerController : MonoBehaviour {
 
 	public void DecreaseMaxPosition() {
 		maxPosition--;
+	}
+
+	private void OnEnable() {
+		Reset ();
 	}
 }

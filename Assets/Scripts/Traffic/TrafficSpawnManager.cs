@@ -100,4 +100,8 @@ public class TrafficSpawnManager : MonoBehaviour {
 			break;
 		}
 	}
+
+	private void OnEnable() {
+		Reset ();
+	}
 }

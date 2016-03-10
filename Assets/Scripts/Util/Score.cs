@@ -7,6 +7,7 @@ public class Score : MonoBehaviour {
 	private int score = 0, lastScore = 0;
 	private float floatScore = 0;
 	private Text scoreText;
+	private bool stopped;
 
 	private void Start() {
 		scoreText = GetComponent<Text> ();

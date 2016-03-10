@@ -90,11 +90,14 @@ public class RoadSpawner : MonoBehaviour {
 		lanes = 3;
 		transitioningPlus = false;
 		transitioningMinus = false;
+		playing = false;
 		for (int i = 0; i < 4; i++) {
-			GameObject pooledObject = pool3L.GetPooledObject();
-			pooledObject.transform.position = new Vector3 (0, 0, -30 * i);
-			pooledObject.SetActive (true);
-			lastSpawnedObject = pooledObject;
+			if (pool3L != null) {
+				GameObject pooledObject = pool3L.GetPooledObject();
+				pooledObject.transform.position = new Vector3 (0, 0, -30 * i);
+				pooledObject.SetActive (true);
+				lastSpawnedObject = pooledObject;
+			}
 		}
 	}
 

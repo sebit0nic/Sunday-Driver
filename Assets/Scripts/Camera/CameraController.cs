@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour {
 	private Vector3 newPosition;
 	private float newSize;
 	private Camera thisCamera;
+	private bool stopLerping;
 
 	private void Start() {
 		newPosition = transform.position;
@@ -15,7 +16,18 @@ public class CameraController : MonoBehaviour {
 		newSize = thisCamera.orthographicSize;
 	}
 
+	public void MoveToOrigin(bool lerp) {
+		if (lerp) {
+			newPosition = new Vector3 (3.2f, 8.25f, -1.45f);
+			newSize = 6.75f;
+		} else {
+			transform.position = new Vector3(3.2f, 8.25f, -1.45f);
+			thisCamera.orthographicSize = 6.75f;
+		}
+	}
+
 	public void MoveToPosition(int lanes) {
+		stopLerping = false;
 		switch (lanes) {
 		case 3:
 			newPosition = new Vector3 (3.2f, 8.25f, 5.4f);

@@ -3,11 +3,10 @@ using System.Collections;
 
 public class ObjectCatcher : MonoBehaviour {
 
-	private TrafficSpawnManager tsm;
+	public TrafficSpawnManager tsm;
 	private RoadSpawner roadSpawner;
 
 	private void Start() {
-		tsm = GameObject.Find ("Traffic Spawn Manager").GetComponent<TrafficSpawnManager> ();
 		roadSpawner = GameObject.Find ("Road Spawner").GetComponent<RoadSpawner> ();
 	}
 

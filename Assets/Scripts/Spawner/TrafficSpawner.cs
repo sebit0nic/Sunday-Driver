@@ -16,7 +16,7 @@ public class TrafficSpawner : MonoBehaviour {
 		if (canSpawn) {
 			Traffic trafficInstance = pool.GetPooledObject ().GetComponent<Traffic> ();
 			trafficInstance.transform.position = transform.position;
-			trafficInstance.Init (moveSpeed);
+			trafficInstance.Init (moveSpeed, transform.position);
 			trafficInstance.gameObject.SetActive (true);
 		}
 	}

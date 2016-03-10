@@ -10,7 +10,9 @@ public class Traffic : MonoBehaviour {
 	private GameObject[] instantiatedCarModels;
 	private int moveSpeed;
 	private Quaternion initialRotation;
+	private Vector3 initialPosition;
 	private bool crashed;
+	private Rigidbody thisRigidbody;
 
 	private void Awake() {
 		instantiatedCarModels = new GameObject[20];
@@ -21,14 +23,19 @@ public class Traffic : MonoBehaviour {
 			instantiatedCarModels [i].transform.parent = this.gameObject.transform;
 			instantiatedCarModels [i].SetActive (false);
 		}
+		thisRigidbody = GetComponent<Rigidbody> ();
 	}
 
 	private void Start() {
 		initialRotation = transform.rotation;
 	}
 
-	public void Init(int moveSpeed) {
+	public void Init(int moveSpeed, Vector3 position) {
 		this.moveSpeed = moveSpeed;
+		thisRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+		crashed = false;
+		transform.position = position;
+		transform.rotation = initialRotation;
 		for (int i = 0; i < carModels.Length; i++) {
 			instantiatedCarModels [i].SetActive (false);
 		}
@@ -56,6 +63,7 @@ public class Traffic : MonoBehaviour {
 
 	private void OnCollisionEnter(Collision coll) {
 		if (coll.gameObject.tag.Equals ("Player")) {
+			thisRigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
 			moveSpeed = 0;
 			crashed = true;
 		}
