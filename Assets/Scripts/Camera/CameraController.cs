@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour {
 	private Vector3 newPosition;
 	private float newSize;
 	private Camera thisCamera;
-	private bool stopLerping;
+	private float fastSmoothing = 1;
 
 	private void Start() {
 		newPosition = transform.position;
@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour {
 	}
 
 	public void MoveToOrigin(bool lerp) {
+		fastSmoothing = 1;
 		if (lerp) {
 			newPosition = new Vector3 (3.2f, 8.25f, -1.45f);
 			newSize = 6.75f;
@@ -27,7 +28,7 @@ public class CameraController : MonoBehaviour {
 	}
 
 	public void MoveToPosition(int lanes) {
-		stopLerping = false;
+		fastSmoothing = 1;
 		switch (lanes) {
 		case 3:
 			newPosition = new Vector3 (3.2f, 8.25f, 5.4f);
@@ -46,6 +47,6 @@ public class CameraController : MonoBehaviour {
 
 	private void Update() {
 		transform.position = Vector3.Lerp (transform.position, newPosition, Time.deltaTime * smoothing);
-		thisCamera.orthographicSize = Mathf.Lerp (thisCamera.orthographicSize, newSize, Time.deltaTime * smoothing);
+		thisCamera.orthographicSize = Mathf.Lerp (thisCamera.orthographicSize, newSize, Time.deltaTime * smoothing * fastSmoothing);
 	}
 }

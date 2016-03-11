@@ -7,6 +7,7 @@ public class PlayerCollision : MonoBehaviour {
 	public RoadSpawner roadSpawner;
 	public Score score;
 	public GameObject gameoverCanvas, startCanvas;
+	public ParticleSystem particleSys;
 	private PlayerController playerController;
 	private TrafficSpawnManager tsm;
 	private CameraController cameraController;
@@ -14,12 +15,14 @@ public class PlayerCollision : MonoBehaviour {
 
 	private float timeout;
 	private bool crashed, screenShakedOnce;
+	private Rigidbody thisRigidbody;
 
 	private void Start() {
 		playerController = GetComponent<PlayerController> ();
 		tsm = GameObject.Find ("Traffic Spawn Manager").GetComponent<TrafficSpawnManager> ();
 		cameraController = GameObject.Find ("Main Camera").GetComponent<CameraController> ();
 		animator = GetComponent<Animator> ();
+		thisRigidbody = GetComponent<Rigidbody> ();
 	}
 
 	private void Update() {
@@ -27,6 +30,16 @@ public class PlayerCollision : MonoBehaviour {
 			cameraController.gameObject.GetComponent<Blur> ().enabled = true;
 			Time.timeScale = 0.025f;
 			gameoverCanvas.SetActive (true);
+		}
+		if (crashed) {
+			float random = Random.Range (-5f, 5f);
+			transform.position = Vector3.Lerp (transform.position, new Vector3 (random, 0, 20), Time.deltaTime * 1.5f);
+			if (random >= 0) {
+				transform.Rotate (0, 5, 0);
+			} else {
+				transform.Rotate (0, -5, 0);
+			}
+			particleSys.Simulate (Time.unscaledDeltaTime * 3, true, false);
 		}
 	}
 
@@ -43,6 +56,7 @@ public class PlayerCollision : MonoBehaviour {
 			}
 			Time.timeScale = 0.1f;
 			score.gameObject.SetActive (false);
+			thisRigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
 		}
 		if (other.gameObject.tag.Equals ("Road")) {
 			if (other.gameObject.name.Equals ("Road 3T4(Clone)")) {
@@ -81,6 +95,9 @@ public class PlayerCollision : MonoBehaviour {
 		tsm.gameObject.SetActive (true);
 		animator.enabled = true;
 		screenShakedOnce = false;
+		thisRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+		particleSys.Pause ();
+		particleSys.Clear ();
 	}
 
 	public void OnResetForHome() {
@@ -104,6 +121,9 @@ public class PlayerCollision : MonoBehaviour {
 		animator.enabled = true;
 		startCanvas.SetActive (true);
 		gameoverCanvas.SetActive (false);
+		thisRigidbody.constraints = RigidbodyConstraints.FreezeAll;
+		particleSys.Pause ();
+		particleSys.Clear ();
 		this.gameObject.SetActive (false);
 	}
 }

@@ -11,6 +11,9 @@ public class ObjectCatcher : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider other) {
+		if (other.gameObject.tag.Equals ("Player")) {
+			return;
+		}
 		if (other.gameObject.tag.Equals ("Traffic")) {
 			tsm.DecreaseCurrentTrafficCount ();
 		}

@@ -50,6 +50,9 @@ public class Traffic : MonoBehaviour {
 		transform.position = new Vector3 (transform.position.x, transform.position.y, transform.position.z + Time.deltaTime * moveSpeed);
 		if (!crashed) {
 			transform.rotation = initialRotation;
+		} else {
+			transform.position = Vector3.Lerp (transform.position, new Vector3 (Random.Range(-5f, 5f), 0, 20), Time.deltaTime * 1.5f);
+			transform.Rotate (0, 5, 0);
 		}
 	}
 
