@@ -12,6 +12,7 @@ public class PlayerCollision : MonoBehaviour {
 	private CameraController cameraController;
 	private Animator animator;
 	public Animator crashAnimator;
+	public GameObject crashText;
 
 	private float timeout;
 	private bool crashed, screenShakedOnce;
@@ -45,7 +46,7 @@ public class PlayerCollision : MonoBehaviour {
 				timeout = Time.time + 0.3f;
 				cameraController.gameObject.GetComponent<Screenshake> ().Shake ();
 				screenShakedOnce = true;
-				crashAnimator.gameObject.SetActive (true);
+				crashText.SetActive (true);
 				crashAnimator.SetTrigger ("OnStart");
 			}
 			Time.timeScale = 0.1f;
@@ -56,13 +57,15 @@ public class PlayerCollision : MonoBehaviour {
 				playerController.IncreaseMaxPosition();
 				tsm.IncreaseAllowedPositions ();
 				cameraController.MoveToPosition (4);
-				crashAnimator.gameObject.transform.Translate (0.65f, 0, 0);
+				crashText.transform.Translate (1.75f, 2, 10);
+				crashText.transform.localScale = new Vector3 (1.2f, 1.2f, 1.2f);
 			}
 			if (other.gameObject.name.Equals("Road 4T5(Clone)")) {
 				playerController.IncreaseMaxPosition();
 				tsm.IncreaseAllowedPositions ();
 				cameraController.MoveToPosition (5);
-				crashAnimator.gameObject.transform.Translate (0.65f, 0, 0);
+				crashText.transform.Translate (2, 2, 10);
+				crashText.transform.localScale = new Vector3 (1.5f, 1.5f, 1.5f);
 			}
 		}
 	}
@@ -90,7 +93,8 @@ public class PlayerCollision : MonoBehaviour {
 		tsm.gameObject.SetActive (true);
 		animator.enabled = true;
 		screenShakedOnce = false;
-		crashAnimator.gameObject.transform.position = new Vector3 (1.85f, 1.529999f, -5f);
+		crashText.transform.position = new Vector3 (1.85f, 3f, -5f);
+		crashText.transform.localScale = new Vector3 (1, 1, 1);
 	}
 
 	public void OnResetForHome() {
@@ -114,7 +118,8 @@ public class PlayerCollision : MonoBehaviour {
 		animator.enabled = true;
 		startCanvas.SetActive (true);
 		gameoverCanvas.SetActive (false);
-		crashAnimator.gameObject.transform.position = new Vector3 (1.85f, 1.529999f, -5f);
+		crashText.transform.position = new Vector3 (1.85f, 3f, -5f);
+		crashText.transform.localScale = new Vector3 (1, 1, 1);
 		this.gameObject.SetActive (false);
 	}
 }
