@@ -3,14 +3,14 @@ using System.Collections;
 
 public class RoadSpawner : MonoBehaviour {
 
-	public GameObject road3L, road3T4, road4L, road4T5, road5L;
-	public GameObject crashText;
+	public GameObject road3L, road3T4, road4L, road4T5, road5L, road5T4, road4T3;
 	private ObjectPool pool3L, pool4L, pool5L;
-	private GameObject transition3T4, transition4T5;
+	private GameObject transition3T4, transition4T5, transition5T4, transition4T3;
 	private GameObject lastSpawnedObject;
 	private int lanes = 3;
 	private bool transitioningPlus = false, transitioningMinus = false;
 	private float transitionTimer;
+	public TrafficSpawnManager tsm;
 
 	private bool playing = false;
 
@@ -32,8 +32,12 @@ public class RoadSpawner : MonoBehaviour {
 		transition3T4.SetActive (false);
 		transition4T5 = (GameObject)Instantiate (road4T5);
 		transition4T5.SetActive (false);
+		transition5T4 = (GameObject)Instantiate (road5T4);
+		transition5T4.SetActive (false);
+		transition4T3 = (GameObject)Instantiate (road4T3);
+		transition4T3.SetActive (false);
 
-		transitionTimer = Time.time + 5;
+		transitionTimer = Time.time + Random.Range (5, 10);
 	}
 
 	public void Spawn() {
@@ -45,6 +49,7 @@ public class RoadSpawner : MonoBehaviour {
 				pooledObject = transition3T4;
 				transitioningPlus = false;
 			} else if (transitioningMinus) {
+				pooledObject = pool3L.GetPooledObject ();
 				transitioningMinus = false;
 			} else {
 				pooledObject = pool3L.GetPooledObject ();
@@ -56,13 +61,20 @@ public class RoadSpawner : MonoBehaviour {
 				pooledObject = transition4T5;
 				transitioningPlus = false;
 			} else if (transitioningMinus) {
+				lanes--;
+				pooledObject = transition4T3;
 				transitioningMinus = false;
 			} else {
 				pooledObject = pool4L.GetPooledObject ();
 			}
 			break;
 		case 5:
-			if (transitioningMinus) {
+			if (transitioningPlus) {
+				pooledObject = pool5L.GetPooledObject ();
+				transitioningPlus = false;
+			} else if (transitioningMinus) {
+				lanes--;
+				pooledObject = transition5T4;
 				transitioningMinus = false;
 			} else {
 				pooledObject = pool5L.GetPooledObject ();
@@ -74,9 +86,17 @@ public class RoadSpawner : MonoBehaviour {
 		lastSpawnedObject = pooledObject;
 
 		if (playing) {
-			if (transitionTimer < Time.time && lanes < 5) {
-				transitioningPlus = true;
-				transitionTimer = Time.time + 5;
+			if (transitionTimer < Time.time) {
+				int random = Random.Range (0, 2);
+				if (random == 0) {
+					transitioningPlus = true;
+				} else {
+					transitioningMinus = true;
+					if (lanes > 3) {
+						tsm.DecreaseAllowedPositions ();
+					}
+				}
+				transitionTimer = Time.time + Random.Range (5, 10);
 			}
 		}
 	}

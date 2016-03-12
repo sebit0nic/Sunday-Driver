@@ -85,6 +85,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void DecreaseMaxPosition() {
+		if (position == maxPosition) {
+			position--;
+			SetLerpValues ();
+			animator.SetTrigger ("OnSteerRight");
+		}
 		maxPosition--;
 	}
 

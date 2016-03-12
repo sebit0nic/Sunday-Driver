@@ -33,11 +33,11 @@ public class CameraController : MonoBehaviour {
 			newSize = 6.75f;
 			break;
 		case 4:
-			newPosition = new Vector3 (3.8f, 8.25f, 1.75f);
+			newPosition = new Vector3 (3.8f, 8.25f, 2.5f);
 			newSize = 8;
 			break;
 		case 5:
-			newPosition = new Vector3 (5f, 10.5f, 1.75f);
+			newPosition = new Vector3 (5f, 10.5f, 2.5f);
 			newSize = 10;
 			break;
 		}
