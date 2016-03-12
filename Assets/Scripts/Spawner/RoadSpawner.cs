@@ -4,6 +4,7 @@ using System.Collections;
 public class RoadSpawner : MonoBehaviour {
 
 	public GameObject road3L, road3T4, road4L, road4T5, road5L;
+	public GameObject crashText;
 	private ObjectPool pool3L, pool4L, pool5L;
 	private GameObject transition3T4, transition4T5;
 	private GameObject lastSpawnedObject;

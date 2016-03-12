@@ -7,22 +7,20 @@ public class PlayerCollision : MonoBehaviour {
 	public RoadSpawner roadSpawner;
 	public Score score;
 	public GameObject gameoverCanvas, startCanvas;
-	public ParticleSystem particleSys;
 	private PlayerController playerController;
 	private TrafficSpawnManager tsm;
 	private CameraController cameraController;
 	private Animator animator;
+	public Animator crashAnimator;
 
 	private float timeout;
 	private bool crashed, screenShakedOnce;
-	private Rigidbody thisRigidbody;
 
 	private void Start() {
 		playerController = GetComponent<PlayerController> ();
 		tsm = GameObject.Find ("Traffic Spawn Manager").GetComponent<TrafficSpawnManager> ();
 		cameraController = GameObject.Find ("Main Camera").GetComponent<CameraController> ();
 		animator = GetComponent<Animator> ();
-		thisRigidbody = GetComponent<Rigidbody> ();
 	}
 
 	private void Update() {
@@ -32,42 +30,39 @@ public class PlayerCollision : MonoBehaviour {
 			gameoverCanvas.SetActive (true);
 		}
 		if (crashed) {
-			float random = Random.Range (-5f, 5f);
-			transform.position = Vector3.Lerp (transform.position, new Vector3 (random, 0, 20), Time.deltaTime * 1.5f);
-			if (random >= 0) {
-				transform.Rotate (0, 5, 0);
-			} else {
-				transform.Rotate (0, -5, 0);
-			}
-			particleSys.Simulate (Time.unscaledDeltaTime * 3, true, false);
+			transform.position = Vector3.Lerp (transform.position, new Vector3 (Random.Range (-5f, 5f), transform.position.y, 20), Time.deltaTime * 1.5f);
+			transform.Rotate (0, 5, 0);
 		}
 	}
 
 	private void OnCollisionEnter(Collision other) {
 		if (other.gameObject.tag.Equals ("Traffic")) {
 			crashed = true;
-			timeout = Time.time + 0.25f;
 			tsm.gameObject.SetActive (false);
 			playerController.enabled = false;
 			animator.enabled = false;
 			if (!screenShakedOnce) {
+				timeout = Time.time + 0.3f;
 				cameraController.gameObject.GetComponent<Screenshake> ().Shake ();
 				screenShakedOnce = true;
+				crashAnimator.gameObject.SetActive (true);
+				crashAnimator.SetTrigger ("OnStart");
 			}
 			Time.timeScale = 0.1f;
 			score.gameObject.SetActive (false);
-			thisRigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePositionY;
 		}
 		if (other.gameObject.tag.Equals ("Road")) {
 			if (other.gameObject.name.Equals ("Road 3T4(Clone)")) {
 				playerController.IncreaseMaxPosition();
 				tsm.IncreaseAllowedPositions ();
 				cameraController.MoveToPosition (4);
+				crashAnimator.gameObject.transform.Translate (0.65f, 0, 0);
 			}
 			if (other.gameObject.name.Equals("Road 4T5(Clone)")) {
 				playerController.IncreaseMaxPosition();
 				tsm.IncreaseAllowedPositions ();
 				cameraController.MoveToPosition (5);
+				crashAnimator.gameObject.transform.Translate (0.65f, 0, 0);
 			}
 		}
 	}
@@ -95,9 +90,7 @@ public class PlayerCollision : MonoBehaviour {
 		tsm.gameObject.SetActive (true);
 		animator.enabled = true;
 		screenShakedOnce = false;
-		thisRigidbody.constraints = RigidbodyConstraints.FreezeAll;
-		particleSys.Pause ();
-		particleSys.Clear ();
+		crashAnimator.gameObject.transform.position = new Vector3 (1.85f, 1.529999f, -5f);
 	}
 
 	public void OnResetForHome() {
@@ -121,9 +114,7 @@ public class PlayerCollision : MonoBehaviour {
 		animator.enabled = true;
 		startCanvas.SetActive (true);
 		gameoverCanvas.SetActive (false);
-		thisRigidbody.constraints = RigidbodyConstraints.FreezeAll;
-		particleSys.Pause ();
-		particleSys.Clear ();
+		crashAnimator.gameObject.transform.position = new Vector3 (1.85f, 1.529999f, -5f);
 		this.gameObject.SetActive (false);
 	}
 }

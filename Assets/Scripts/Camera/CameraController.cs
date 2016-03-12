@@ -3,12 +3,10 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
-	public float smoothing;
-	public Transform hotspot;
+	private float smoothing = 3;
 	private Vector3 newPosition;
 	private float newSize;
 	private Camera thisCamera;
-	private float fastSmoothing = 1;
 
 	private void Start() {
 		newPosition = transform.position;
@@ -17,7 +15,7 @@ public class CameraController : MonoBehaviour {
 	}
 
 	public void MoveToOrigin(bool lerp) {
-		fastSmoothing = 1;
+		smoothing = 3;
 		if (lerp) {
 			newPosition = new Vector3 (3.2f, 8.25f, -1.45f);
 			newSize = 6.75f;
@@ -28,7 +26,7 @@ public class CameraController : MonoBehaviour {
 	}
 
 	public void MoveToPosition(int lanes) {
-		fastSmoothing = 1;
+		smoothing = 3;
 		switch (lanes) {
 		case 3:
 			newPosition = new Vector3 (3.2f, 8.25f, 5.4f);
@@ -47,6 +45,6 @@ public class CameraController : MonoBehaviour {
 
 	private void Update() {
 		transform.position = Vector3.Lerp (transform.position, newPosition, Time.deltaTime * smoothing);
-		thisCamera.orthographicSize = Mathf.Lerp (thisCamera.orthographicSize, newSize, Time.deltaTime * smoothing * fastSmoothing);
+		thisCamera.orthographicSize = Mathf.Lerp (thisCamera.orthographicSize, newSize, Time.deltaTime * smoothing);
 	}
 }
