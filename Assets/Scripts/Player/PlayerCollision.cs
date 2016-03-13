@@ -29,6 +29,7 @@ public class PlayerCollision : MonoBehaviour {
 			cameraController.gameObject.GetComponent<Blur> ().enabled = true;
 			Time.timeScale = 0.025f;
 			gameoverCanvas.SetActive (true);
+			score.OnGameOver ();
 		}
 		if (crashed) {
 			transform.position = Vector3.Lerp (transform.position, new Vector3 (Random.Range (-5f, 5f), transform.position.y, 20), Time.deltaTime * 2.5f);
@@ -48,9 +49,9 @@ public class PlayerCollision : MonoBehaviour {
 				screenShakedOnce = true;
 				crashText.SetActive (true);
 				crashAnimator.SetTrigger ("OnStart");
+				score.SetStopped ();
 			}
 			Time.timeScale = 0.1f;
-			score.gameObject.SetActive (false);
 		}
 		if (other.gameObject.tag.Equals ("Road")) {
 			if (other.gameObject.name.Equals ("Road 3T4(Clone)")) {
@@ -104,7 +105,6 @@ public class PlayerCollision : MonoBehaviour {
 		roadSpawner.Reset ();
 		roadSpawner.StartSpawning ();
 		playerController.enabled = true;
-		score.gameObject.SetActive (true);
 		score.Reset ();
 		tsm.gameObject.SetActive (true);
 		animator.enabled = true;
@@ -129,7 +129,6 @@ public class PlayerCollision : MonoBehaviour {
 		roadSpawner.Reset ();
 		playerController.enabled = true;
 		playerController.gameObject.SetActive (false);
-		score.Reset ();
 		screenShakedOnce = false;
 		animator.enabled = true;
 		startCanvas.SetActive (true);
