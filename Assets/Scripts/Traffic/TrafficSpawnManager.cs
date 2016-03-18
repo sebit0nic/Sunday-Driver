@@ -10,17 +10,13 @@ public class TrafficSpawnManager : MonoBehaviour {
 
 	[Header("Timer")]
 	public float[] timer;
-	public float[] nextSpawn;
 	public float blockTimer = 0, blockInterval = 3;
 	public float difficultyTimer = 0, difficultyInterval = 10;
 
 	private void Start () {
 		trafficSpawner = GetComponentsInChildren<TrafficSpawner> ();
-		for (int i = 0; i < nextSpawn.Length; i++) {
-			nextSpawn [i] = Random.Range (0f, 1f);
-		}
 		for (int i = 0; i < timer.Length; i++) {
-			timer [i] = Time.time + nextSpawn [i];
+			timer [i] = Time.time + Random.Range (0f, 1f);
 		}
 
 		blockedPosition = Random.Range (0, allowedPositions);
@@ -32,8 +28,7 @@ public class TrafficSpawnManager : MonoBehaviour {
 	private void Update () {
 		for (int i = 0; i < allowedPositions; i++) {
 			if (timer [i] < Time.time) {
-				nextSpawn [i] = Random.Range (minSpawnTime, maxSpawnTime);
-				timer [i] = Time.time + nextSpawn [i];
+				timer [i] = Time.time + Random.Range (minSpawnTime, maxSpawnTime);
 				if (currentTrafficCount < maxAllowedTraffic && i != blockedPosition) {
 					trafficSpawner [i].Spawn (currentSpeed);
 					currentTrafficCount++;
@@ -41,6 +36,9 @@ public class TrafficSpawnManager : MonoBehaviour {
 			}
 		}
 		if (blockTimer < Time.time) {
+			timer [blockedPosition] = Time.time + Random.Range (1f, 2f);
+
+
 			blockedPosition = Random.Range (0, allowedPositions);
 			blockTimer = Time.time + blockInterval;
 		}
@@ -55,12 +53,20 @@ public class TrafficSpawnManager : MonoBehaviour {
 			if (maxSpawnTime > 1.25f) {
 				maxSpawnTime -= 0.25f;
 			}
+			if (currentSpeed > 20 && minSpawnTime > 0.25f) {
+				minSpawnTime -= 0.25f;
+			}
 			difficultyTimer = Time.time + difficultyInterval;
 		}
 	}
 
 	public void DecreaseCurrentTrafficCount() {
 		currentTrafficCount--;
+		if (Random.Range (0, 5) == 0) {
+			//Spawn random obstacle
+			int random = Random.Range(0, allowedPositions);
+			trafficSpawner[random].SpawnPuddle(random);
+		}
 	}
 
 	public void Reset() {
@@ -70,10 +76,10 @@ public class TrafficSpawnManager : MonoBehaviour {
 		blockInterval = 3;
 		currentTrafficCount = 0;
 		allowedPositions = 3;
-		for (int i = 0; i < nextSpawn.Length; i++) {
-			nextSpawn [i] = 0;
-		}
 		transform.position = new Vector3 (transform.position.x, transform.position.y, -40);
+		for (int i = 0; i < timer.Length; i++) {
+			timer [i] = Time.time + Random.Range (0f, 1f);
+		}
 	}
 
 	public void IncreaseAllowedPositions() {

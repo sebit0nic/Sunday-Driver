@@ -45,7 +45,7 @@ public class PlayerCollision : MonoBehaviour {
 			animator.enabled = false;
 			if (!screenShakedOnce) {
 				timeout = Time.time + 0.3f;
-				cameraController.gameObject.GetComponent<Screenshake> ().Shake ();
+				cameraController.gameObject.GetComponent<Screenshake> ().Shake (0.1f, 0.0025f);
 				screenShakedOnce = true;
 				crashText.SetActive (true);
 				crashAnimator.SetTrigger ("OnStart");
@@ -85,6 +85,11 @@ public class PlayerCollision : MonoBehaviour {
 				crashText.transform.localScale = new Vector3 (1, 1, 1);
 			}
 		}
+
+		if (other.gameObject.tag.Equals ("Puddle") && !screenShakedOnce) {
+			animator.SetTrigger ("OnSpin");
+			cameraController.gameObject.GetComponent<Screenshake> ().Shake (0.015f, 0.0010f);
+		}
 	}
 
 	public void OnResetForGame() {
@@ -100,14 +105,20 @@ public class PlayerCollision : MonoBehaviour {
 		for (int i = 0; i < destroyableObjects.Length; i++) {
 			destroyableObjects[i].SetActive(false);
 		}
+		destroyableObjects = GameObject.FindGameObjectsWithTag ("Puddle");
+		for (int i = 0; i < destroyableObjects.Length; i++) {
+			destroyableObjects[i].SetActive(false);
+		}
 		cameraController.MoveToOrigin (false);
 		cameraController.MoveToPosition (3);
 		roadSpawner.Reset ();
 		roadSpawner.StartSpawning ();
 		playerController.enabled = true;
+		playerController.Reset ();
 		score.Reset ();
 		tsm.gameObject.SetActive (true);
 		animator.enabled = true;
+		animator.SetTrigger ("OnIdle");
 		screenShakedOnce = false;
 		crashText.transform.position = new Vector3 (1.85f, 3f, -5f);
 		crashText.transform.localScale = new Vector3 (1, 1, 1);
@@ -125,12 +136,18 @@ public class PlayerCollision : MonoBehaviour {
 		for (int i = 0; i < destroyableObjects.Length; i++) {
 			destroyableObjects[i].SetActive(false);
 		}
+		destroyableObjects = GameObject.FindGameObjectsWithTag ("Puddle");
+		for (int i = 0; i < destroyableObjects.Length; i++) {
+			destroyableObjects [i].SetActive (false);
+		}
 		cameraController.MoveToOrigin (true);
 		roadSpawner.Reset ();
 		playerController.enabled = true;
+		playerController.Reset ();
 		playerController.gameObject.SetActive (false);
 		screenShakedOnce = false;
 		animator.enabled = true;
+		animator.SetTrigger ("OnIdle");
 		startCanvas.SetActive (true);
 		gameoverCanvas.SetActive (false);
 		crashText.transform.position = new Vector3 (1.85f, 3f, -5f);

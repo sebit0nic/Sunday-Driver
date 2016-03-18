@@ -3,21 +3,34 @@ using System.Collections;
 
 public class TrafficSpawner : MonoBehaviour {
 
-	public GameObject traffic;
+	public GameObject traffic, puddle;
 	public bool canSpawn = true;
-	private ObjectPool pool;
+	private ObjectPool trafficPool, puddlePool;
+	private float puddleTimer;
 
 	private void Start() {
-		pool = ObjectPool.CreateInstance<ObjectPool> ();
-		pool.Init (traffic, 30, true);
+		trafficPool = ObjectPool.CreateInstance<ObjectPool> ();
+		trafficPool.Init (traffic, 10, true);
+		puddlePool = ObjectPool.CreateInstance<ObjectPool> ();
+		puddlePool.Init (puddle, 3, true);
+		puddleTimer = Time.time;
 	}
 
 	public void Spawn (int moveSpeed) {
 		if (canSpawn) {
-			Traffic trafficInstance = pool.GetPooledObject ().GetComponent<Traffic> ();
+			Traffic trafficInstance = trafficPool.GetPooledObject ().GetComponent<Traffic> ();
 			trafficInstance.transform.position = transform.position;
 			trafficInstance.Init (moveSpeed, transform.position);
 			trafficInstance.gameObject.SetActive (true);
+		}
+	}
+
+	public void SpawnPuddle(int position) {
+		if (canSpawn && puddleTimer < Time.time) {
+			GameObject puddleInstance = puddlePool.GetPooledObject ();
+			puddleInstance.transform.position = new Vector3 (transform.position.x - position * 0.05f, 0.026f, transform.position.z);
+			puddleInstance.SetActive (true);
+			puddleTimer = Time.time + 0.5f;
 		}
 	}
 

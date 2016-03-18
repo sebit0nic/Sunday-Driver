@@ -4,10 +4,15 @@ using System.Collections.Generic;
 
 public class ObjectPool : ScriptableObject {
 
+	private GameObject parent;
 	private GameObject pooledObject;
 	private bool willGrow;
 
 	private List<GameObject> pooledObjects;
+
+	private void Awake() {
+		parent = GameObject.Find ("Instantiated Objects");
+	}
 
 	public void Init(GameObject pooledObject, int pooledAmount, bool willGrow) {
 		this.pooledObject = pooledObject;
@@ -16,6 +21,7 @@ public class ObjectPool : ScriptableObject {
 		pooledObjects = new List<GameObject> ();
 		for (int i = 0; i < pooledAmount; i++) {
 			GameObject obj = (GameObject)Instantiate(pooledObject);
+			obj.transform.SetParent (parent.transform, false);
 			obj.SetActive(false);
 			pooledObjects.Add (obj);
 		}

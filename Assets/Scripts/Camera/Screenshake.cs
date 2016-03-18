@@ -25,10 +25,10 @@ public class Screenshake : MonoBehaviour {
 		}
 	}
 
-	public void Shake() {
+	public void Shake(float shakeIntensity, float shakeDecay) {
 		originalPosition = transform.position;
 		originalRotation = transform.rotation;
-		shakeIntensity = 0.1f;
-		shakeDecay = 0.0025f;
+		this.shakeIntensity = shakeIntensity;
+		this.shakeDecay = shakeDecay;
 	}
 }

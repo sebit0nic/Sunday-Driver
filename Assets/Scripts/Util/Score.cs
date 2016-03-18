@@ -39,12 +39,18 @@ public class Score : MonoBehaviour {
 				tempScore = Mathf.RoundToInt (tempFloatScore);
 				endscoreText.text = tempScore.ToString ();
 				endscoreShadow.text = tempScore.ToString ();
+			} else {
+				endscoreText.text = score.ToString ();
+				endscoreShadow.text = score.ToString ();
 			}
 			if (tempHighscore < highscore) {
 				tempFloatHighscore += Time.unscaledDeltaTime * highscore * 0.75f;
 				tempHighscore = Mathf.RoundToInt (tempFloatHighscore);
 				highscoreText.text = "Top: " + tempHighscore.ToString ();
 				highscoreShadow.text = "Top: " + tempHighscore.ToString ();
+			} else {
+				highscoreText.text = "Top: " + highscore.ToString ();
+				highscoreShadow.text = "Top: " + highscore.ToString ();
 			}
 		}
 	}

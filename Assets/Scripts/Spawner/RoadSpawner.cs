@@ -3,6 +3,7 @@ using System.Collections;
 
 public class RoadSpawner : MonoBehaviour {
 
+	private GameObject parent;
 	public GameObject road3L, road3T4, road4L, road4T5, road5L, road5T4, road4T3;
 	private ObjectPool pool3L, pool4L, pool5L;
 	private GameObject transition3T4, transition4T5, transition5T4, transition4T3;
@@ -13,6 +14,10 @@ public class RoadSpawner : MonoBehaviour {
 	public TrafficSpawnManager tsm;
 
 	private bool playing = false;
+
+	private void Awake() {
+		parent = GameObject.Find ("Instantiated Objects");
+	}
 
 	private void Start() {
 		pool3L = ObjectPool.CreateInstance<ObjectPool> ();
@@ -29,12 +34,16 @@ public class RoadSpawner : MonoBehaviour {
 		pool5L.Init (road5L, 5, true);
 
 		transition3T4 = (GameObject)Instantiate (road3T4);
+		transition3T4.transform.SetParent (parent.transform, false);
 		transition3T4.SetActive (false);
 		transition4T5 = (GameObject)Instantiate (road4T5);
+		transition4T5.transform.SetParent (parent.transform, false);
 		transition4T5.SetActive (false);
 		transition5T4 = (GameObject)Instantiate (road5T4);
+		transition5T4.transform.SetParent (parent.transform, false);
 		transition5T4.SetActive (false);
 		transition4T3 = (GameObject)Instantiate (road4T3);
+		transition4T3.transform.SetParent (parent.transform, false);
 		transition4T3.SetActive (false);
 
 		transitionTimer = Time.time + Random.Range (5, 10);

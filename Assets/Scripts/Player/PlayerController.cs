@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour {
 	private Vector2 fp, lp;
 
 	private Animator animator;
+	private bool moveable = true;
 
 	private void Awake() {
 		animator = GetComponent<Animator> ();
@@ -25,38 +26,41 @@ public class PlayerController : MonoBehaviour {
 
 	private void Update() {
 		timer += Time.deltaTime;
-		//PC
-		if (Input.GetAxis ("Horizontal") < 0 && position < maxPosition && timer >= inputDelay) {
-			position++;
-			timer = 0;
-			SetLerpValues ();
-			animator.SetTrigger ("OnSteerLeft");
-		} else if (Input.GetAxis ("Horizontal") > 0 && position > minPosition && timer >= inputDelay) {
-			position--;
-			timer = 0;
-			SetLerpValues ();
-			animator.SetTrigger ("OnSteerRight");
-		}
 
-		//Mobile
-		if (Input.touchCount > 0) {
-			Touch touch = Input.GetTouch (0);
-			if (touch.phase == TouchPhase.Began) {
-				fp = touch.position;
-				lp = touch.position;
+		if (moveable) {
+			//PC
+			if (Input.GetAxis ("Horizontal") < 0 && position < maxPosition && timer >= inputDelay) {
+				position++;
+				timer = 0;
+				SetLerpValues ();
+				animator.SetTrigger ("OnSteerLeft");
+			} else if (Input.GetAxis ("Horizontal") > 0 && position > minPosition && timer >= inputDelay) {
+				position--;
+				timer = 0;
+				SetLerpValues ();
+				animator.SetTrigger ("OnSteerRight");
 			}
-			if (touch.phase == TouchPhase.Moved) {
-				lp = touch.position;
-			}
-			if (touch.phase == TouchPhase.Ended) {
-				if ((fp.x - lp.x) > 50 && position < maxPosition) {
-					position++;
-					SetLerpValues ();
-					animator.SetTrigger ("OnSteerLeft");
-				} else if ((fp.x - lp.x) < -50 && position > minPosition) {
-					position--;
-					SetLerpValues ();
-					animator.SetTrigger ("OnSteerRight");
+
+			//Mobile
+			if (Input.touchCount > 0) {
+				Touch touch = Input.GetTouch (0);
+				if (touch.phase == TouchPhase.Began) {
+					fp = touch.position;
+					lp = touch.position;
+				}
+				if (touch.phase == TouchPhase.Moved) {
+					lp = touch.position;
+				}
+				if (touch.phase == TouchPhase.Ended) {
+					if ((fp.x - lp.x) > 50 && position < maxPosition) {
+						position++;
+						SetLerpValues ();
+						animator.SetTrigger ("OnSteerLeft");
+					} else if ((fp.x - lp.x) < -50 && position > minPosition) {
+						position--;
+						SetLerpValues ();
+						animator.SetTrigger ("OnSteerRight");
+					}
 				}
 			}
 		}
@@ -78,6 +82,8 @@ public class PlayerController : MonoBehaviour {
 		maxPosition = 2;
 		transform.position = initialPosition;
 		transform.rotation = initialRotation;
+		animator.SetTrigger ("OnIdle");
+		moveable = true;
 	}
 
 	public void IncreaseMaxPosition() {
@@ -91,6 +97,14 @@ public class PlayerController : MonoBehaviour {
 			animator.SetTrigger ("OnSteerRight");
 		}
 		maxPosition--;
+	}
+
+	public void SetMoveableOn() {
+		moveable = true;
+	}
+
+	public void SetMoveableOff() {
+		moveable = false;
 	}
 
 	private void OnEnable() {
