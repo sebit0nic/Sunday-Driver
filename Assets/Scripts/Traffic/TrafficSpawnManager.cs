@@ -37,7 +37,9 @@ public class TrafficSpawnManager : MonoBehaviour {
 		}
 		if (blockTimer < Time.time) {
 			timer [blockedPosition] = Time.time + Random.Range (1f, 2f);
-
+			if (Random.Range (0, 3) == 0 && allowedPositions > 3) {
+				trafficSpawner [blockedPosition].SpawnRock (blockedPosition);
+			}
 
 			blockedPosition = Random.Range (0, allowedPositions);
 			blockTimer = Time.time + blockInterval;
@@ -74,6 +76,7 @@ public class TrafficSpawnManager : MonoBehaviour {
 		maxAllowedTraffic = 10;
 		maxSpawnTime = 3;
 		blockInterval = 3;
+		blockTimer = Time.time + blockInterval;
 		currentTrafficCount = 0;
 		allowedPositions = 3;
 		transform.position = new Vector3 (transform.position.x, transform.position.y, -40);

@@ -48,7 +48,7 @@ public class Traffic : MonoBehaviour {
 		if (!crashed) {
 			transform.rotation = initialRotation;
 		} else {
-			transform.position = Vector3.Lerp (transform.position, new Vector3 (Random.Range(-5f, 5f), 0, 20), Time.deltaTime * 2.5f);
+			transform.position = Vector3.Lerp (transform.position, new Vector3 (Random.Range(-5f, 5f), 0, 30), Time.deltaTime * 2.5f);
 			transform.Rotate (0, 10, 0);
 		}
 	}

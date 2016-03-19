@@ -13,6 +13,7 @@ public class PlayerCollision : MonoBehaviour {
 	private Animator animator;
 	public Animator crashAnimator;
 	public GameObject crashText;
+	public GameObject marker;
 
 	private float timeout;
 	private bool crashed, screenShakedOnce;
@@ -32,13 +33,13 @@ public class PlayerCollision : MonoBehaviour {
 			score.OnGameOver ();
 		}
 		if (crashed) {
-			transform.position = Vector3.Lerp (transform.position, new Vector3 (Random.Range (-5f, 5f), transform.position.y, 20), Time.deltaTime * 2.5f);
+			transform.position = Vector3.Lerp (transform.position, new Vector3 (Random.Range (-5f, 5f), transform.position.y, 30), Time.deltaTime * 2.5f);
 			transform.Rotate (0, 10, 0);
 		}
 	}
 
 	private void OnCollisionEnter(Collision other) {
-		if (other.gameObject.tag.Equals ("Traffic")) {
+		if (other.gameObject.tag.Equals ("Traffic") || other.gameObject.tag.Equals("Rock")) {
 			crashed = true;
 			tsm.gameObject.SetActive (false);
 			playerController.enabled = false;
@@ -52,6 +53,7 @@ public class PlayerCollision : MonoBehaviour {
 				score.SetStopped ();
 			}
 			Time.timeScale = 0.1f;
+			marker.SetActive (false);
 		}
 		if (other.gameObject.tag.Equals ("Road")) {
 			if (other.gameObject.name.Equals ("Road 3T4(Clone)")) {
@@ -59,7 +61,7 @@ public class PlayerCollision : MonoBehaviour {
 				tsm.IncreaseAllowedPositions ();
 				tsm.AdjustSpawnerPosition ();
 				cameraController.MoveToPosition (4);
-				crashText.transform.Translate (1.75f, 2, 10);
+				crashText.transform.Translate (1.75f, 0, 12.5f);
 				crashText.transform.localScale = new Vector3 (1.2f, 1.2f, 1.2f);
 			}
 			if (other.gameObject.name.Equals("Road 4T5(Clone)")) {
@@ -67,21 +69,21 @@ public class PlayerCollision : MonoBehaviour {
 				tsm.IncreaseAllowedPositions ();
 				tsm.AdjustSpawnerPosition ();
 				cameraController.MoveToPosition (5);
-				crashText.transform.Translate (2, 2, 10);
+				crashText.transform.Translate (1f, 2f, 0f);
 				crashText.transform.localScale = new Vector3 (1.5f, 1.5f, 1.5f);
 			}
 			if (other.gameObject.name.Equals("Road 5T4(Clone)")) {
 				playerController.DecreaseMaxPosition();
 				cameraController.MoveToPosition (4);
 				tsm.AdjustSpawnerPosition ();
-				crashText.transform.Translate (-2, -2, -10);
+				crashText.transform.Translate (-1f, -2f, -0f);
 				crashText.transform.localScale = new Vector3 (1.2f, 1.2f, 1.2f);
 			}
 			if (other.gameObject.name.Equals("Road 4T3(Clone)")) {
 				playerController.DecreaseMaxPosition();
 				cameraController.MoveToPosition (3);
 				tsm.AdjustSpawnerPosition ();
-				crashText.transform.Translate (-1.75f, -2, -10);
+				crashText.transform.Translate (-1.75f, -5f, -12.5f);
 				crashText.transform.localScale = new Vector3 (1, 1, 1);
 			}
 		}
@@ -93,41 +95,30 @@ public class PlayerCollision : MonoBehaviour {
 	}
 
 	public void OnResetForGame() {
-		crashed = false;
-		Time.timeScale = 1;
+		ResetObjects ();
 		cameraController.gameObject.GetComponent<Blur> ().enabled = false;
-		gameoverCanvas.SetActive (false);
-		GameObject[] destroyableObjects = GameObject.FindGameObjectsWithTag ("Traffic");
-		for (int i = 0; i < destroyableObjects.Length; i++) {
-			destroyableObjects[i].SetActive(false);
-		}
-		destroyableObjects = GameObject.FindGameObjectsWithTag ("Road");
-		for (int i = 0; i < destroyableObjects.Length; i++) {
-			destroyableObjects[i].SetActive(false);
-		}
-		destroyableObjects = GameObject.FindGameObjectsWithTag ("Puddle");
-		for (int i = 0; i < destroyableObjects.Length; i++) {
-			destroyableObjects[i].SetActive(false);
-		}
 		cameraController.MoveToOrigin (false);
 		cameraController.MoveToPosition (3);
-		roadSpawner.Reset ();
 		roadSpawner.StartSpawning ();
-		playerController.enabled = true;
-		playerController.Reset ();
 		score.Reset ();
 		tsm.gameObject.SetActive (true);
-		animator.enabled = true;
 		animator.SetTrigger ("OnIdle");
 		screenShakedOnce = false;
-		crashText.transform.position = new Vector3 (1.85f, 3f, -5f);
-		crashText.transform.localScale = new Vector3 (1, 1, 1);
 	}
 
 	public void OnResetForHome() {
+		ResetObjects ();
+		cameraController.MoveToOrigin (true);
+		playerController.gameObject.SetActive (false);
+		screenShakedOnce = false;
+		startCanvas.SetActive (true);
+		this.gameObject.SetActive (false);
+	}
+
+	private void ResetObjects() {
 		crashed = false;
 		Time.timeScale = 1;
-
+		gameoverCanvas.SetActive (false);
 		GameObject[] destroyableObjects = GameObject.FindGameObjectsWithTag ("Traffic");
 		for (int i = 0; i < destroyableObjects.Length; i++) {
 			destroyableObjects[i].SetActive(false);
@@ -138,20 +129,18 @@ public class PlayerCollision : MonoBehaviour {
 		}
 		destroyableObjects = GameObject.FindGameObjectsWithTag ("Puddle");
 		for (int i = 0; i < destroyableObjects.Length; i++) {
-			destroyableObjects [i].SetActive (false);
+			destroyableObjects[i].SetActive(false);
 		}
-		cameraController.MoveToOrigin (true);
+		destroyableObjects = GameObject.FindGameObjectsWithTag ("Rock");
+		for (int i = 0; i < destroyableObjects.Length; i++) {
+			destroyableObjects[i].SetActive(false);
+		}
 		roadSpawner.Reset ();
 		playerController.enabled = true;
 		playerController.Reset ();
-		playerController.gameObject.SetActive (false);
-		screenShakedOnce = false;
 		animator.enabled = true;
-		animator.SetTrigger ("OnIdle");
-		startCanvas.SetActive (true);
-		gameoverCanvas.SetActive (false);
-		crashText.transform.position = new Vector3 (1.85f, 3f, -5f);
+		crashText.transform.position = new Vector3 (2f, 3f, -5f);
 		crashText.transform.localScale = new Vector3 (1, 1, 1);
-		this.gameObject.SetActive (false);
+		marker.SetActive (true);
 	}
 }

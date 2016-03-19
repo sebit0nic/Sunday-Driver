@@ -19,7 +19,7 @@ public class Rain : MonoBehaviour {
 			falloff = true;
 		}
 		if (falloff) {
-			globalLight.intensity -= 0.075f;
+			globalLight.intensity -= Time.deltaTime * 3;
 			if (globalLight.intensity <= 1) {
 				globalLight.intensity = 1;
 				falloff = false;

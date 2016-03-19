@@ -17,10 +17,10 @@ public class CameraController : MonoBehaviour {
 	public void MoveToOrigin(bool lerp) {
 		smoothing = 3;
 		if (lerp) {
-			newPosition = new Vector3 (3.2f, 8.25f, -1.45f);
+			newPosition = new Vector3 (3.3f, 8.25f, -1.45f);
 			newSize = 6.75f;
 		} else {
-			transform.position = new Vector3(3.2f, 8.25f, -1.45f);
+			transform.position = new Vector3(3.3f, 8.25f, -1.45f);
 			thisCamera.orthographicSize = 6.75f;
 		}
 	}
@@ -29,15 +29,15 @@ public class CameraController : MonoBehaviour {
 		smoothing = 3;
 		switch (lanes) {
 		case 3:
-			newPosition = new Vector3 (3.2f, 8.25f, 5.4f);
+			newPosition = new Vector3 (3.3f, 8.25f, 8f);
 			newSize = 6.75f;
 			break;
 		case 4:
-			newPosition = new Vector3 (3.8f, 8.25f, 2.5f);
+			newPosition = new Vector3 (3.9f, 8.25f, 5.5f);
 			newSize = 8;
 			break;
 		case 5:
-			newPosition = new Vector3 (5f, 10.5f, 2.5f);
+			newPosition = new Vector3 (5f, 10.5f, 7f);
 			newSize = 10;
 			break;
 		}

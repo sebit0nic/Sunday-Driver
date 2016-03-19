@@ -33,11 +33,11 @@ public class WeatherController : MonoBehaviour {
 			switch (state) {
 			case "Normal":
 				rain.gameObject.SetActive (true);
-				tempColor.r -= 0.01f;
-				tempColor.g -= 0.01f;
-				tempColor.b -= 0.01f;
+				tempColor.r -= Time.deltaTime * 0.4f;
+				tempColor.g -= Time.deltaTime * 0.4f;
+				tempColor.b -= Time.deltaTime * 0.4f;
 				mainLight.color = tempColor;
-				rain.gameObject.transform.position = Vector3.Lerp (rain.gameObject.transform.position, new Vector3 (-4, 20, -15.1f), Time.deltaTime * 0.5f);
+				rain.gameObject.transform.position = Vector3.Lerp (rain.gameObject.transform.position, new Vector3 (-4, 20, -8f), Time.deltaTime * 0.5f);
 				if (tempColor.r <= 0.6f) {
 					tempColor.r = 0.6f;
 					tempColor.g = 0.6f;
@@ -49,11 +49,11 @@ public class WeatherController : MonoBehaviour {
 				}
 				break;
 			case "Rain":
-				tempColor.r += 0.01f;
-				tempColor.g += 0.01f;
-				tempColor.b += 0.01f;
+				tempColor.r += Time.deltaTime * 0.4f;
+				tempColor.g += Time.deltaTime * 0.4f;
+				tempColor.b += Time.deltaTime * 0.4f;
 				mainLight.color = tempColor;
-				rain.gameObject.transform.position = Vector3.Lerp (rain.gameObject.transform.position, new Vector3 (-35, 20, -15.1f), Time.deltaTime * 0.5f);
+				rain.gameObject.transform.position = Vector3.Lerp (rain.gameObject.transform.position, new Vector3 (-35, 20, -8f), Time.deltaTime * 0.5f);
 				if (tempColor.r >= 1f) {
 					tempColor.r = 1f;
 					tempColor.g = 1f;

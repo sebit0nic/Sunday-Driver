@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour {
 
 	private Animator animator;
 	private bool moveable = true;
+	public GameObject marker;
 
 	private void Awake() {
 		animator = GetComponent<Animator> ();
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour {
 		transform.rotation = initialRotation;
 		animator.SetTrigger ("OnIdle");
 		moveable = true;
+		marker.SetActive (true);
 	}
 
 	public void IncreaseMaxPosition() {
@@ -101,10 +103,12 @@ public class PlayerController : MonoBehaviour {
 
 	public void SetMoveableOn() {
 		moveable = true;
+		marker.SetActive (true);
 	}
 
 	public void SetMoveableOff() {
 		moveable = false;
+		marker.SetActive (false);
 	}
 
 	private void OnEnable() {
