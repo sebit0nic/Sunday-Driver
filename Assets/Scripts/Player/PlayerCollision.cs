@@ -18,11 +18,21 @@ public class PlayerCollision : MonoBehaviour {
 	private float timeout;
 	private bool crashed, screenShakedOnce;
 
+	private Vector3 crashTextPos1, crashTextPos2, crashTextPos3;
+	private Vector3 crashTextScale1, crashTextScale2, crashTextScale3;
+
 	private void Start() {
 		playerController = GetComponent<PlayerController> ();
 		tsm = GameObject.Find ("Traffic Spawn Manager").GetComponent<TrafficSpawnManager> ();
 		cameraController = GameObject.Find ("Main Camera").GetComponent<CameraController> ();
 		animator = GetComponent<Animator> ();
+
+		crashTextPos1 = new Vector3 (2f, 3f, -5f);
+		crashTextPos2 = new Vector3 (3.75f, 8f, 7.5f);
+		crashTextPos3 = new Vector3 (4.75f, 10f, 7.5f);
+		crashTextScale1 = new Vector3 (1f, 1f, 1f);
+		crashTextScale2 = new Vector3 (1.2f, 1.2f, 1.2f);
+		crashTextScale3 = new Vector3 (1.5f, 1.5f, 1.5f);
 	}
 
 	private void Update() {
@@ -61,36 +71,35 @@ public class PlayerCollision : MonoBehaviour {
 				tsm.IncreaseAllowedPositions ();
 				tsm.AdjustSpawnerPosition ();
 				cameraController.MoveToPosition (4);
-				crashText.transform.Translate (1.75f, 0, 12.5f);
-				crashText.transform.localScale = new Vector3 (1.2f, 1.2f, 1.2f);
+				crashText.transform.position = crashTextPos2;
+				crashText.transform.localScale = crashTextScale2;
 			}
 			if (other.gameObject.name.Equals("Road 4T5(Clone)")) {
 				playerController.IncreaseMaxPosition();
 				tsm.IncreaseAllowedPositions ();
 				tsm.AdjustSpawnerPosition ();
 				cameraController.MoveToPosition (5);
-				crashText.transform.Translate (1f, 2f, 0f);
-				crashText.transform.localScale = new Vector3 (1.5f, 1.5f, 1.5f);
+				crashText.transform.position = crashTextPos3;
+				crashText.transform.localScale = crashTextScale3;
 			}
 			if (other.gameObject.name.Equals("Road 5T4(Clone)")) {
 				playerController.DecreaseMaxPosition();
 				cameraController.MoveToPosition (4);
 				tsm.AdjustSpawnerPosition ();
-				crashText.transform.Translate (-1f, -2f, -0f);
-				crashText.transform.localScale = new Vector3 (1.2f, 1.2f, 1.2f);
+				crashText.transform.position = crashTextPos2;
+				crashText.transform.localScale = crashTextScale2;
 			}
 			if (other.gameObject.name.Equals("Road 4T3(Clone)")) {
 				playerController.DecreaseMaxPosition();
 				cameraController.MoveToPosition (3);
 				tsm.AdjustSpawnerPosition ();
-				crashText.transform.Translate (-1.75f, -5f, -12.5f);
-				crashText.transform.localScale = new Vector3 (1, 1, 1);
+				crashText.transform.position = crashTextPos1;
+				crashText.transform.localScale = crashTextScale1;
 			}
 		}
 
 		if (other.gameObject.tag.Equals ("Puddle") && !screenShakedOnce) {
 			animator.SetTrigger ("OnSpin");
-			cameraController.gameObject.GetComponent<Screenshake> ().Shake (0.015f, 0.0010f);
 		}
 	}
 
@@ -139,8 +148,8 @@ public class PlayerCollision : MonoBehaviour {
 		playerController.enabled = true;
 		playerController.Reset ();
 		animator.enabled = true;
-		crashText.transform.position = new Vector3 (2f, 3f, -5f);
-		crashText.transform.localScale = new Vector3 (1, 1, 1);
+		crashText.transform.position = crashTextPos1;
+		crashText.transform.localScale = crashTextScale1;
 		marker.SetActive (true);
 	}
 }

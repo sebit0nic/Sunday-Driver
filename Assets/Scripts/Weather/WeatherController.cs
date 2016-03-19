@@ -38,6 +38,7 @@ public class WeatherController : MonoBehaviour {
 				tempColor.b -= Time.deltaTime * 0.4f;
 				mainLight.color = tempColor;
 				rain.gameObject.transform.position = Vector3.Lerp (rain.gameObject.transform.position, new Vector3 (-4, 20, -8f), Time.deltaTime * 0.5f);
+				rain.SetCanLightning (true);
 				if (tempColor.r <= 0.6f) {
 					tempColor.r = 0.6f;
 					tempColor.g = 0.6f;
@@ -54,6 +55,7 @@ public class WeatherController : MonoBehaviour {
 				tempColor.b += Time.deltaTime * 0.4f;
 				mainLight.color = tempColor;
 				rain.gameObject.transform.position = Vector3.Lerp (rain.gameObject.transform.position, new Vector3 (-35, 20, -8f), Time.deltaTime * 0.5f);
+				rain.SetCanLightning (false);
 				if (tempColor.r >= 1f) {
 					tempColor.r = 1f;
 					tempColor.g = 1f;
