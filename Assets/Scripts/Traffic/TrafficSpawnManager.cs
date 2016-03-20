@@ -76,6 +76,7 @@ public class TrafficSpawnManager : MonoBehaviour {
 		maxAllowedTraffic = 10;
 		maxSpawnTime = 3;
 		blockInterval = 3;
+		blockedPosition = Random.Range (0, allowedPositions);
 		blockTimer = Time.time + blockInterval;
 		currentTrafficCount = 0;
 		allowedPositions = 3;

@@ -12,6 +12,7 @@ public class RoadSpawner : MonoBehaviour {
 	private bool transitioningPlus = false, transitioningMinus = false;
 	private float transitionTimer;
 	public TrafficSpawnManager tsm;
+	public NatureSpawner natureSpawner;
 
 	private bool playing = false;
 
@@ -56,6 +57,7 @@ public class RoadSpawner : MonoBehaviour {
 			if (transitioningPlus) {
 				lanes++;
 				pooledObject = transition3T4;
+				natureSpawner.IncreaseLeftOffset ();
 				transitioningPlus = false;
 			} else if (transitioningMinus) {
 				pooledObject = pool3L.GetPooledObject ();
@@ -68,10 +70,12 @@ public class RoadSpawner : MonoBehaviour {
 			if (transitioningPlus) {
 				lanes++;
 				pooledObject = transition4T5;
+				natureSpawner.IncreaseLeftOffset ();
 				transitioningPlus = false;
 			} else if (transitioningMinus) {
 				lanes--;
 				pooledObject = transition4T3;
+				natureSpawner.DecreaseLeftOffset ();
 				transitioningMinus = false;
 			} else {
 				pooledObject = pool4L.GetPooledObject ();
@@ -84,6 +88,7 @@ public class RoadSpawner : MonoBehaviour {
 			} else if (transitioningMinus) {
 				lanes--;
 				pooledObject = transition5T4;
+				natureSpawner.DecreaseLeftOffset ();
 				transitioningMinus = false;
 			} else {
 				pooledObject = pool5L.GetPooledObject ();
@@ -96,9 +101,11 @@ public class RoadSpawner : MonoBehaviour {
 
 		if (playing) {
 			if (transitionTimer < Time.time) {
-				int random = Random.Range (0, 2);
+				int random = Random.Range (0, 3);
 				if (random == 0) {
 					transitioningPlus = true;
+				} else if (random == 1) {
+					//Do nothing
 				} else {
 					transitioningMinus = true;
 					if (lanes > 3) {

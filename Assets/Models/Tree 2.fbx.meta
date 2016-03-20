@@ -1,40 +1,18 @@
 fileFormatVersion: 2
-guid: 65e45f1c5542f674f83082c970292a37
-timeCreated: 1456056454
+guid: 06304c72f6672f1489ce74bdcf31793d
+timeCreated: 1458491367
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Back Left Tire
-    100002: Back Right Tire
-    100004: Car
-    100006: Front Left Tire
-    100008: Front Right Tire
-    100010: //RootNode
-    400000: Back Left Tire
-    400002: Back Right Tire
-    400004: Car
-    400006: Front Left Tire
-    400008: Front Right Tire
-    400010: //RootNode
-    2300000: Back Left Tire
-    2300002: Back Right Tire
-    2300004: Car
-    2300006: Front Left Tire
-    2300008: Front Right Tire
-    3300000: Back Left Tire
-    3300002: Back Right Tire
-    3300004: Car
-    3300006: Front Left Tire
-    3300008: Front Right Tire
-    4300000: Front Right Tire
-    4300002: Back Right Tire
-    4300004: Back Left Tire
-    4300006: Front Left Tire
-    4300008: Car
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cylinder
   materials:
     importMaterials: 0
-    materialName: 1
+    materialName: 0
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
@@ -56,7 +34,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.3
+    globalScale: 0.75
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -72,8 +50,8 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 60
-    normalImportMode: 0
+    normalSmoothAngle: 0
+    normalImportMode: 1
     tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0

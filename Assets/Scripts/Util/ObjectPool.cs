@@ -36,6 +36,7 @@ public class ObjectPool : ScriptableObject {
 
 		if (willGrow) {
 			GameObject obj = (GameObject)Instantiate(pooledObject);
+			obj.transform.SetParent (parent.transform, false);
 			pooledObjects.Add (obj);
 			return obj;
 		}

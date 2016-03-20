@@ -14,6 +14,7 @@ public class PlayerCollision : MonoBehaviour {
 	public Animator crashAnimator;
 	public GameObject crashText;
 	public GameObject marker;
+	public NatureSpawner natureSpawner;
 
 	private float timeout;
 	private bool crashed, screenShakedOnce;
@@ -151,5 +152,6 @@ public class PlayerCollision : MonoBehaviour {
 		crashText.transform.position = crashTextPos1;
 		crashText.transform.localScale = crashTextScale1;
 		marker.SetActive (true);
+		natureSpawner.Reset ();
 	}
 }

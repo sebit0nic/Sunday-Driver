@@ -7,10 +7,18 @@ public class Puddle : MonoBehaviour {
 	private ParticleSystem.EmissionModule psemit;
 	private bool playedOnce;
 	private BoxCollider thisBoxCollider;
+	private float timeout;
 
 	private void Awake() {
 		thisBoxCollider = GetComponent<BoxCollider> ();
 		psemit = particles.emission;
+	}
+		
+	private void Update() {
+		if (playedOnce && timeout < Time.time) {
+			thisBoxCollider.enabled = true;
+			playedOnce = false;
+		}
 	}
 
 	private void OnCollisionEnter(Collision other) {
@@ -21,6 +29,7 @@ public class Puddle : MonoBehaviour {
 				particles.Play ();
 			}
 			playedOnce = true;
+			timeout = Time.time + 0.5f;
 			thisBoxCollider.enabled = false;
 		}
 	}
@@ -30,7 +39,6 @@ public class Puddle : MonoBehaviour {
 			psemit.enabled = false;
 			particles.Stop ();
 		}
-		playedOnce = false;
 		thisBoxCollider.enabled = true;
 	}
 }
