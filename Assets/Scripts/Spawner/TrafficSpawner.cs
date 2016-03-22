@@ -3,10 +3,10 @@ using System.Collections;
 
 public class TrafficSpawner : MonoBehaviour {
 
-	public GameObject traffic, puddle, rock;
+	public GameObject traffic, puddle, rock, coin;
 	public bool canSpawn = true;
-	private ObjectPool trafficPool, puddlePool, rockPool;
-	private float puddleTimer;
+	private ObjectPool trafficPool, puddlePool, rockPool, coinPool;
+	private float puddleTimer, coinTimer;
 
 	private void Start() {
 		trafficPool = ObjectPool.CreateInstance<ObjectPool> ();
@@ -15,7 +15,10 @@ public class TrafficSpawner : MonoBehaviour {
 		puddlePool.Init (puddle, 3, true);
 		rockPool = ObjectPool.CreateInstance<ObjectPool> ();
 		rockPool.Init (rock, 2, true);
+		coinPool = ObjectPool.CreateInstance<ObjectPool> ();
+		coinPool.Init (coin, 3, true);
 		puddleTimer = Time.time;
+		coinTimer = Time.time;
 	}
 
 	public void Spawn (int moveSpeed) {
@@ -41,6 +44,15 @@ public class TrafficSpawner : MonoBehaviour {
 			GameObject rockInstance = rockPool.GetPooledObject ();
 			rockInstance.transform.position = new Vector3 (transform.position.x, 0.255f, transform.position.z);
 			rockInstance.SetActive (true);
+		}
+	}
+
+	public void SpawnCoin(int position) {
+		if (canSpawn && coinTimer < Time.time) {
+			GameObject coinInstance = coinPool.GetPooledObject ();
+			coinInstance.transform.position = new Vector3 (transform.position.x, 0.5f, transform.position.z);
+			coinInstance.SetActive (true);
+			coinTimer += 0.5f;
 		}
 	}
 

@@ -6,7 +6,8 @@ public class PlayerCollision : MonoBehaviour {
 
 	public RoadSpawner roadSpawner;
 	public Score score;
-	public GameObject gameoverCanvas, startCanvas;
+	public CoinCounter coinCounter;
+	public GameObject gameoverCanvas, startCanvas, gameCanvas;
 	private PlayerController playerController;
 	private TrafficSpawnManager tsm;
 	private CameraController cameraController;
@@ -42,6 +43,7 @@ public class PlayerCollision : MonoBehaviour {
 			Time.timeScale = 0.025f;
 			gameoverCanvas.SetActive (true);
 			score.OnGameOver ();
+			gameCanvas.SetActive (false);
 		}
 		if (crashed) {
 			transform.position = Vector3.Lerp (transform.position, new Vector3 (Random.Range (-5f, 5f), transform.position.y, 30), Time.deltaTime * 2.5f);
@@ -102,6 +104,10 @@ public class PlayerCollision : MonoBehaviour {
 		if (other.gameObject.tag.Equals ("Puddle") && !screenShakedOnce) {
 			animator.SetTrigger ("OnSpin");
 		}
+
+		if (other.gameObject.tag.Equals ("Coin")) {
+			coinCounter.IncreaseCoinCounter(1);
+		}
 	}
 
 	public void OnResetForGame() {
@@ -110,6 +116,7 @@ public class PlayerCollision : MonoBehaviour {
 		cameraController.MoveToOrigin (false);
 		cameraController.MoveToPosition (3);
 		roadSpawner.StartSpawning ();
+		gameCanvas.SetActive (true);
 		score.Reset ();
 		tsm.gameObject.SetActive (true);
 		animator.SetTrigger ("OnIdle");
@@ -142,6 +149,10 @@ public class PlayerCollision : MonoBehaviour {
 			destroyableObjects[i].SetActive(false);
 		}
 		destroyableObjects = GameObject.FindGameObjectsWithTag ("Rock");
+		for (int i = 0; i < destroyableObjects.Length; i++) {
+			destroyableObjects[i].SetActive(false);
+		}
+		destroyableObjects = GameObject.FindGameObjectsWithTag ("Coin");
 		for (int i = 0; i < destroyableObjects.Length; i++) {
 			destroyableObjects[i].SetActive(false);
 		}

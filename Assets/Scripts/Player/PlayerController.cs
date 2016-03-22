@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class PlayerController : MonoBehaviour {
 
 	private int position = 1;
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour {
 	private Animator animator;
 	private bool moveable = true;
 	public GameObject marker;
+	private int buttonPressDirection = 0;
+	public ControlScheme controlScheme;
 
 	private void Awake() {
 		animator = GetComponent<Animator> ();
@@ -42,8 +45,8 @@ public class PlayerController : MonoBehaviour {
 				animator.SetTrigger ("OnSteerRight");
 			}
 
-			//Mobile
-			if (Input.touchCount > 0) {
+			//Mobile (swipe)
+			if (Input.touchCount > 0 && controlScheme.GetControls() != 1) {
 				Touch touch = Input.GetTouch (0);
 				if (touch.phase == TouchPhase.Began) {
 					fp = touch.position;
@@ -63,6 +66,19 @@ public class PlayerController : MonoBehaviour {
 						animator.SetTrigger ("OnSteerRight");
 					}
 				}
+			}
+
+			//Mobile (tap)
+			if (buttonPressDirection < 0 && position < maxPosition && timer >= inputDelay) {
+				position++;
+				timer = 0;
+				SetLerpValues ();
+				animator.SetTrigger ("OnSteerLeft");
+			} else if (buttonPressDirection > 0 && position > minPosition && timer >= inputDelay) {
+				position--;
+				timer = 0;
+				SetLerpValues ();
+				animator.SetTrigger ("OnSteerRight");
 			}
 		}
 
@@ -86,6 +102,7 @@ public class PlayerController : MonoBehaviour {
 		animator.SetTrigger ("OnIdle");
 		moveable = true;
 		marker.SetActive (true);
+		buttonPressDirection = 0;
 	}
 
 	public void IncreaseMaxPosition() {
@@ -113,5 +130,9 @@ public class PlayerController : MonoBehaviour {
 
 	private void OnEnable() {
 		Reset ();
+	}
+
+	public void OnMove(int direction) {
+		buttonPressDirection = direction;
 	}
 }

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 5b8180d927182014086e87cdc3d4481a
-timeCreated: 1458399905
+timeCreated: 1458679962
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -11,6 +11,10 @@ TextureImporter:
     21300008: Shop Button
     21300010: Highscore Button
     21300012: Retry Button
+    21300014: Coin Icon
+    21300016: Tap Button
+    21300018: Swipe Button
+    21300020: Settings Button
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -218,6 +222,98 @@ TextureImporter:
         serializedVersion: 2
         x: 820
         y: 5
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 55, y: 97}
+        - {x: 35, y: 100}
+        - {x: -32, y: 100}
+        - {x: -61, y: 89}
+        - {x: -99, y: 56}
+        - {x: -100, y: 48}
+        - {x: -100, y: -39}
+        - {x: -68, y: -89}
+        - {x: -37, y: -100}
+        - {x: 36, y: -100}
+        - {x: 73, y: -85}
+        - {x: 100, y: -41}
+        - {x: 100, y: 45}
+    - name: Coin Icon
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 416
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -37, y: 50}
+        - {x: -50, y: 32}
+        - {x: -50, y: -27}
+        - {x: -48, y: -37}
+        - {x: -34, y: -50}
+        - {x: 32, y: -50}
+        - {x: 50, y: -44}
+        - {x: 50, y: 49}
+        - {x: 43, y: 50}
+    - name: Tap Button
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 218
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 55, y: 97}
+        - {x: 35, y: 100}
+        - {x: -32, y: 100}
+        - {x: -61, y: 89}
+        - {x: -99, y: 56}
+        - {x: -100, y: 48}
+        - {x: -100, y: -39}
+        - {x: -68, y: -89}
+        - {x: -37, y: -100}
+        - {x: 36, y: -100}
+        - {x: 73, y: -85}
+        - {x: 100, y: -41}
+        - {x: 100, y: 45}
+    - name: Swipe Button
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 231
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 55, y: 97}
+        - {x: 35, y: 100}
+        - {x: -32, y: 100}
+        - {x: -61, y: 89}
+        - {x: -99, y: 56}
+        - {x: -100, y: 48}
+        - {x: -100, y: -39}
+        - {x: -68, y: -89}
+        - {x: -37, y: -100}
+        - {x: 36, y: -100}
+        - {x: 73, y: -85}
+        - {x: 100, y: -41}
+        - {x: 100, y: 45}
+    - name: Settings Button
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 418
         width: 200
         height: 200
       alignment: 0

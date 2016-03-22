@@ -12,6 +12,7 @@ public class TrafficSpawnManager : MonoBehaviour {
 	public float[] timer;
 	public float blockTimer = 0, blockInterval = 3;
 	public float difficultyTimer = 0, difficultyInterval = 10;
+	private int puddleProbability = 5, coinProbability = 15;
 
 	private void Start () {
 		trafficSpawner = GetComponentsInChildren<TrafficSpawner> ();
@@ -49,10 +50,10 @@ public class TrafficSpawnManager : MonoBehaviour {
 				currentSpeed++;
 			}
 			maxAllowedTraffic += 3;
-			if (blockInterval > 1) {
+			if (blockInterval > 0.5f) {
 				blockInterval -= 0.1f;
 			}
-			if (maxSpawnTime > 1.25f) {
+			if (maxSpawnTime > 1f) {
 				maxSpawnTime -= 0.25f;
 			}
 			if (currentSpeed > 20 && minSpawnTime > 0.25f) {
@@ -64,10 +65,12 @@ public class TrafficSpawnManager : MonoBehaviour {
 
 	public void DecreaseCurrentTrafficCount() {
 		currentTrafficCount--;
-		if (Random.Range (0, 5) == 0) {
-			//Spawn random obstacle
-			int random = Random.Range(0, allowedPositions);
-			trafficSpawner[random].SpawnPuddle(random);
+		if (Random.Range (0, puddleProbability) == 0) {
+			int random = Random.Range (0, allowedPositions);
+			trafficSpawner [random].SpawnPuddle (random);
+		} else if (Random.Range (0, coinProbability) == 0) {
+			int random = Random.Range (0, allowedPositions);
+			trafficSpawner [random].SpawnCoin (random);
 		}
 	}
 

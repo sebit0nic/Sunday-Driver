@@ -37,17 +37,17 @@ public class NatureSpawner : MonoBehaviour {
 	}
 
 	public void IncreaseLeftOffset() {
-		leftMinX += 1.5f;
-		leftMaxX += 1.5f;
+		leftMinX += 2f;
+		leftMaxX += 2f;
 	}
 
 	public void DecreaseLeftOffset() {
-		leftMinX -= 1.5f;
-		leftMaxX -= 1.5f;
+		leftMinX -= 2f;
+		leftMaxX -= 2f;
 	}
 
 	public void Reset() {
-		leftMinX = 4.5f;
-		leftMaxX = 8.5f;
+		leftMinX = 5f;
+		leftMaxX = 9f;
 	}
 }

@@ -10,12 +10,8 @@ public class Score : MonoBehaviour {
 	private int score = 0, highscore = 0, lastScore = 0;
 	private int tempScore = 0, tempHighscore = 0;
 	private float floatScore = 0, tempFloatScore = 0, tempFloatHighscore;
-	private Text scoreText;
+	public Text scoreText;
 	private bool gameover, stopped;
-
-	private void Awake() {
-		scoreText = GetComponent<Text> ();
-	}
 
 	private void Start() {
 		if (clearMemory) {
@@ -56,7 +52,6 @@ public class Score : MonoBehaviour {
 	}
 
 	public void OnGameOver() {
-		scoreText.enabled = false;
 		gameover = true;
 		if (highscore < score) {
 			highscore = score;
@@ -70,7 +65,6 @@ public class Score : MonoBehaviour {
 	}
 
 	public void Reset() {
-		scoreText.enabled = true;
 		score = 0;
 		lastScore = 0;
 		floatScore = 0;
