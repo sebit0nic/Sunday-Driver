@@ -26,7 +26,7 @@ public class Traffic : MonoBehaviour {
 		int random = Random.Range (0, carModels.Length);
 		carModels[random].SetActive(true);
 		meshRenderer = carModels[random].GetComponentInChildren<MeshRenderer>();
-		meshRenderer.material = allPaintJobs[Random.Range(0, allPaintJobs.Length)];
+		meshRenderer.sharedMaterial = allPaintJobs[Random.Range(0, allPaintJobs.Length)];
 	}
 
 	private void Update() {

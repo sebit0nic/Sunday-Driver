@@ -126,6 +126,12 @@ public class PlayerCollision : MonoBehaviour {
 		screenShakedOnce = false;
 	}
 
+	public void OnResetForShop() {
+		ResetObjects ();
+		cameraController.MoveToOrigin (true);
+		playerController.enabled = false;
+	}
+
 	public void OnResetForHome() {
 		ResetObjects ();
 		cameraController.MoveToOrigin (true);

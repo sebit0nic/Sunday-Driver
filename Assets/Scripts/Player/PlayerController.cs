@@ -22,10 +22,16 @@ public class PlayerController : MonoBehaviour {
 	private int buttonPressDirection = 0;
 	public ControlScheme controlScheme;
 
+	public GameObject[] playerModels;
+
 	private void Awake() {
 		animator = GetComponent<Animator> ();
 		initialPosition = transform.position;
 		initialRotation = transform.rotation;
+	}
+
+	private void Start() {
+		playerModels [PlayerPrefs.GetInt ("SelectedCar")].SetActive (true);
 	}
 
 	private void Update() {
@@ -103,6 +109,11 @@ public class PlayerController : MonoBehaviour {
 		moveable = true;
 		marker.gameObject.SetActive (true);
 		buttonPressDirection = 0;
+
+		for (int i = 0; i < playerModels.Length; i++) {
+			playerModels [i].SetActive (false);
+		}
+		playerModels [PlayerPrefs.GetInt ("SelectedCar")].SetActive (true);
 	}
 
 	public void IncreaseMaxPosition() {

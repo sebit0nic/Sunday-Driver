@@ -45,17 +45,19 @@ public class TrafficSpawnManager : MonoBehaviour {
 			blockTimer = Time.time + blockInterval;
 		}
 		if (difficultyTimer < Time.time) {
-			if (currentSpeed < 30) {
+			if (currentSpeed < 20) {
 				currentSpeed++;
 			}
-			maxAllowedTraffic += 3;
-			if (blockInterval > 0.5f) {
+			if (maxAllowedTraffic < 30) {
+				maxAllowedTraffic += 3;
+			}
+			if (blockInterval > 1f) {
 				blockInterval -= 0.1f;
 			}
 			if (maxSpawnTime > 1f) {
 				maxSpawnTime -= 0.25f;
 			}
-			if (currentSpeed > 20 && minSpawnTime > 0.25f) {
+			if (currentSpeed == 20 && minSpawnTime > 0.25f) {
 				minSpawnTime -= 0.25f;
 			}
 			difficultyTimer = Time.time + difficultyInterval;
@@ -77,11 +79,12 @@ public class TrafficSpawnManager : MonoBehaviour {
 		currentSpeed = 10;
 		maxAllowedTraffic = 10;
 		maxSpawnTime = 3;
+		minSpawnTime = 0.75f;
 		blockInterval = 3;
+		allowedPositions = 3;
 		blockedPosition = Random.Range (0, allowedPositions);
 		blockTimer = Time.time + blockInterval;
 		currentTrafficCount = 0;
-		allowedPositions = 3;
 		transform.position = new Vector3 (transform.position.x, transform.position.y, -40);
 		for (int i = 0; i < timer.Length; i++) {
 			timer [i] = Time.time + Random.Range (0f, 1f);
