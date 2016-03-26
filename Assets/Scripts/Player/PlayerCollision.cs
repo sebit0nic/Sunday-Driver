@@ -18,7 +18,7 @@ public class PlayerCollision : MonoBehaviour {
 	public NatureSpawner natureSpawner;
 
 	private float timeout;
-	private bool crashed, screenShakedOnce;
+	private bool crashed, screenShakedOnce, canvasActivatedOnce;
 
 	private Vector3 crashTextPos1, crashTextPos2, crashTextPos3;
 	private Vector3 crashTextScale1, crashTextScale2, crashTextScale3;
@@ -41,7 +41,10 @@ public class PlayerCollision : MonoBehaviour {
 		if (crashed && timeout < Time.time) {
 			cameraController.gameObject.GetComponent<Blur> ().enabled = true;
 			Time.timeScale = 0.025f;
-			gameoverCanvas.SetActive (true);
+			if (!canvasActivatedOnce) {
+				gameoverCanvas.SetActive (true);
+				canvasActivatedOnce = true;
+			}
 			score.OnGameOver ();
 			gameCanvas.SetActive (false);
 		}
@@ -164,5 +167,6 @@ public class PlayerCollision : MonoBehaviour {
 		crashText.transform.localScale = crashTextScale1;
 		marker.SetActive (true);
 		natureSpawner.Reset ();
+		canvasActivatedOnce = false;
 	}
 }

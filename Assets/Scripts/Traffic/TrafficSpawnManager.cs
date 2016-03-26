@@ -11,7 +11,7 @@ public class TrafficSpawnManager : MonoBehaviour {
 	[Header("Timer")]
 	public float[] timer;
 	public float blockTimer = 0, blockInterval = 3;
-	public float difficultyTimer = 0, difficultyInterval = 10;
+	public float difficultyTimer = 0, difficultyInterval = 5;
 	private int puddleProbability = 5, coinProbability = 15;
 
 	private void Start () {
@@ -23,7 +23,6 @@ public class TrafficSpawnManager : MonoBehaviour {
 		blockedPosition = Random.Range (0, allowedPositions);
 		blockTimer = Time.time + blockInterval;
 		difficultyTimer = Time.time + difficultyInterval;
-		difficultyInterval = 5;
 	}
 
 	private void Update () {
@@ -87,6 +86,7 @@ public class TrafficSpawnManager : MonoBehaviour {
 		for (int i = 0; i < timer.Length; i++) {
 			timer [i] = Time.time + Random.Range (0f, 1f);
 		}
+		difficultyTimer = Time.time + difficultyInterval;
 	}
 
 	public void IncreaseAllowedPositions() {

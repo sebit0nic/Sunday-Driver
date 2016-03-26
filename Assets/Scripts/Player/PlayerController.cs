@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour {
 
 	private Animator animator;
 	private bool moveable = true;
-	public GameObject marker;
+	public Animator marker;
 	private int buttonPressDirection = 0;
 	public ControlScheme controlScheme;
 
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour {
 		transform.rotation = initialRotation;
 		animator.SetTrigger ("OnIdle");
 		moveable = true;
-		marker.SetActive (true);
+		marker.gameObject.SetActive (true);
 		buttonPressDirection = 0;
 	}
 
@@ -120,12 +120,13 @@ public class PlayerController : MonoBehaviour {
 
 	public void SetMoveableOn() {
 		moveable = true;
-		marker.SetActive (true);
+		marker.gameObject.SetActive (true);
+		marker.Play ("Idle", 0, 0f);
 	}
 
 	public void SetMoveableOff() {
 		moveable = false;
-		marker.SetActive (false);
+		marker.gameObject.SetActive (false);
 	}
 
 	private void OnEnable() {

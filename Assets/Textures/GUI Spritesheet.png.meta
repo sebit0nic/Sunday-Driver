@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 5b8180d927182014086e87cdc3d4481a
-timeCreated: 1458679962
+timeCreated: 1458851550
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -15,6 +15,7 @@ TextureImporter:
     21300016: Tap Button
     21300018: Swipe Button
     21300020: Settings Button
+    21300022: Buy Button
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -333,6 +334,31 @@ TextureImporter:
         - {x: 73, y: -85}
         - {x: 100, y: -41}
         - {x: 100, y: 45}
+    - name: Buy Button
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 424
+        width: 199
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 99.5, y: 45}
+        - {x: 81.5, y: 70}
+        - {x: 40.5, y: 100}
+        - {x: -31.5, y: 100}
+        - {x: -59.5, y: 87}
+        - {x: -85.5, y: 66}
+        - {x: -99.5, y: 35}
+        - {x: -99.5, y: -30}
+        - {x: -97.5, y: -42}
+        - {x: -71.5, y: -93}
+        - {x: -37.5, y: -100}
+        - {x: 44.5, y: -100}
+        - {x: 60.5, y: -88}
+        - {x: 99.5, y: -56}
     outline: []
   spritePackingTag: GUI Spritesheet
   userData: 
