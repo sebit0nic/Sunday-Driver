@@ -4,25 +4,12 @@ using System.Collections;
 public class Traffic : MonoBehaviour {
 
 	public GameObject[] carModels;
-	public Material paintJobs;
-	private Material instantiatedMaterial;
+	public Material[] allPaintJobs;
 	private MeshRenderer meshRenderer;
-	private GameObject[] instantiatedCarModels;
 	private int moveSpeed;
 	private Quaternion initialRotation;
 	private Vector3 initialPosition;
 	private bool crashed;
-
-	private void Awake() {
-		instantiatedCarModels = new GameObject[20];
-		instantiatedMaterial = Instantiate (paintJobs) as Material;
-		for (int i = 0; i < carModels.Length; i++) {
-			instantiatedCarModels [i] = Instantiate (carModels [i], Vector3.zero, Quaternion.identity) as GameObject;
-			instantiatedCarModels [i].transform.Rotate (0, 180, 0);
-			instantiatedCarModels [i].transform.parent = this.gameObject.transform;
-			instantiatedCarModels [i].SetActive (false);
-		}
-	}
 
 	private void Start() {
 		initialRotation = transform.rotation;
@@ -34,13 +21,12 @@ public class Traffic : MonoBehaviour {
 		transform.position = position;
 		transform.rotation = initialRotation;
 		for (int i = 0; i < carModels.Length; i++) {
-			instantiatedCarModels [i].SetActive (false);
+			carModels[i].SetActive(false);
 		}
 		int random = Random.Range (0, carModels.Length);
-		instantiatedCarModels [random].SetActive (true);
-		meshRenderer = instantiatedCarModels [random].GetComponentInChildren<MeshRenderer> ();
-		instantiatedMaterial.SetTextureOffset ("_MainTex", new Vector2 (Random.Range(0f, 1f), Random.Range(0f, 1f)));
-		meshRenderer.material = instantiatedMaterial;
+		carModels[random].SetActive(true);
+		meshRenderer = carModels[random].GetComponentInChildren<MeshRenderer>();
+		meshRenderer.material = allPaintJobs[Random.Range(0, allPaintJobs.Length)];
 	}
 
 	private void Update() {
