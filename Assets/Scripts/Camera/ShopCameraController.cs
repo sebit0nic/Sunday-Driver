@@ -11,8 +11,6 @@ public class ShopCameraController : MonoBehaviour {
 	private bool[] bought;
 	public GameObject selectButton, buyButton;
 	public CoinCounter coinCounter;
-	public GameObject marker;
-	public float[] markerPositions;
 
 	private void Start() {
 		tempVector = transform.position;
@@ -69,7 +67,6 @@ public class ShopCameraController : MonoBehaviour {
 	public void SelectCar() {
 		PlayerPrefs.SetInt ("SelectedCar", selectedCar);
 		PlayerPrefs.Save ();
-		marker.transform.position = new Vector3 (markerPositions [selectedCar], marker.transform.position.y, marker.transform.position.z);
 	}
 
 	public void BuyCar() {
@@ -82,10 +79,7 @@ public class ShopCameraController : MonoBehaviour {
 			selectButton.SetActive (true);
 			buyButton.SetActive (false);
 			coinCounter.Refresh ();
+			SelectCar ();
 		}
-	}
-
-	private void OnEnable() {
-		marker.transform.position = new Vector3 (markerPositions [PlayerPrefs.GetInt ("SelectedCar")], marker.transform.position.y, marker.transform.position.z);
 	}
 }

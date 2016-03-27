@@ -9,7 +9,7 @@ public class PlayerCollision : MonoBehaviour {
 	public CoinCounter coinCounter;
 	public GameObject gameoverCanvas, startCanvas, gameCanvas;
 	private PlayerController playerController;
-	private TrafficSpawnManager tsm;
+	public TrafficSpawnManager tsm;
 	private CameraController cameraController;
 	private Animator animator;
 	public Animator crashAnimator;
@@ -25,7 +25,6 @@ public class PlayerCollision : MonoBehaviour {
 
 	private void Start() {
 		playerController = GetComponent<PlayerController> ();
-		tsm = GameObject.Find ("Traffic Spawn Manager").GetComponent<TrafficSpawnManager> ();
 		cameraController = GameObject.Find ("Main Camera").GetComponent<CameraController> ();
 		animator = GetComponent<Animator> ();
 
@@ -120,6 +119,7 @@ public class PlayerCollision : MonoBehaviour {
 		cameraController.MoveToPosition (3);
 		roadSpawner.StartSpawning ();
 		gameCanvas.SetActive (true);
+		playerController.enabled = true;
 		score.Reset ();
 		tsm.gameObject.SetActive (true);
 		animator.SetTrigger ("OnIdle");
@@ -135,10 +135,10 @@ public class PlayerCollision : MonoBehaviour {
 	public void OnResetForHome() {
 		ResetObjects ();
 		cameraController.MoveToOrigin (true);
-		playerController.gameObject.SetActive (false);
+		//playerController.gameObject.SetActive (false);
+		playerController.enabled = false;
 		screenShakedOnce = false;
 		startCanvas.SetActive (true);
-		this.gameObject.SetActive (false);
 	}
 
 	private void ResetObjects() {
@@ -166,7 +166,6 @@ public class PlayerCollision : MonoBehaviour {
 			destroyableObjects[i].SetActive(false);
 		}
 		roadSpawner.Reset ();
-		playerController.enabled = true;
 		playerController.Reset ();
 		animator.enabled = true;
 		crashText.transform.position = crashTextPos1;
