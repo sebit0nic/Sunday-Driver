@@ -135,7 +135,6 @@ public class PlayerCollision : MonoBehaviour {
 	public void OnResetForHome() {
 		ResetObjects ();
 		cameraController.MoveToOrigin (true);
-		//playerController.gameObject.SetActive (false);
 		playerController.enabled = false;
 		screenShakedOnce = false;
 		startCanvas.SetActive (true);
