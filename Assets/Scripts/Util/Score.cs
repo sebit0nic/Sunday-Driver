@@ -12,6 +12,8 @@ public class Score : MonoBehaviour {
 	private float floatScore = 0, tempFloatScore = 0, tempFloatHighscore;
 	public Text scoreText;
 	private bool gameover, stopped;
+	public Animator crownAnimator;
+	private bool animationPlayedOnce, newHighscore;
 
 	private void Start() {
 		if (clearMemory) {
@@ -38,6 +40,10 @@ public class Score : MonoBehaviour {
 			} else {
 				endscoreText.text = score.ToString ();
 				endscoreShadow.text = score.ToString ();
+				if (!animationPlayedOnce && newHighscore) {
+					crownAnimator.SetTrigger ("OnNewHighscore");
+					animationPlayedOnce = true;
+				}
 			}
 			if (tempHighscore < highscore) {
 				tempFloatHighscore += Time.unscaledDeltaTime * highscore * 0.75f;
@@ -57,6 +63,7 @@ public class Score : MonoBehaviour {
 			highscore = score;
 			PlayerPrefs.SetInt ("Highscore", highscore);
 			PlayerPrefs.Save ();
+			newHighscore = true;
 		}
 	}
 
@@ -75,5 +82,7 @@ public class Score : MonoBehaviour {
 		scoreText.text = "0";
 		gameover = false;
 		stopped = false;
+		animationPlayedOnce = false;
+		newHighscore = false;
 	}
 }

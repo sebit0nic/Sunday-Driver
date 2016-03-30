@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 5b8180d927182014086e87cdc3d4481a
-timeCreated: 1458851550
+timeCreated: 1459282456
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -16,6 +16,7 @@ TextureImporter:
     21300018: Swipe Button
     21300020: Settings Button
     21300022: Buy Button
+    21300024: Crown Icon
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -359,6 +360,48 @@ TextureImporter:
         - {x: 44.5, y: -100}
         - {x: 60.5, y: -88}
         - {x: 99.5, y: -56}
+    - name: Crown Icon
+      rect:
+        serializedVersion: 2
+        x: 628
+        y: 442
+        width: 303
+        height: 228
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 114.5, y: -77}
+        - {x: -111.5, y: -77}
+        - {x: -119.5, y: -83}
+        - {x: -119.5, y: -107}
+        - {x: -115.5, y: -114}
+        - {x: 114.5, y: -114}
+        - {x: 120.5, y: -110}
+        - {x: 121.5, y: -102}
+        - {x: 121.5, y: -88}
+      - - {x: 142.5, y: 97}
+        - {x: 88.5, y: 78}
+        - {x: 38.5, y: 114}
+        - {x: -32.5, y: 114}
+        - {x: -39.5, y: 113}
+        - {x: -101.5, y: 36}
+        - {x: -127.5, y: 28}
+        - {x: -127.5, y: 12}
+        - {x: -107.5, y: -72}
+        - {x: -105.5, y: -75}
+        - {x: 107.5, y: -75}
+        - {x: 148.5, y: 27}
+        - {x: 151.5, y: 37}
+        - {x: 151.5, y: 83}
+      - - {x: -141.5, y: 84}
+        - {x: -151.5, y: 78}
+        - {x: -151.5, y: 30}
+        - {x: -145.5, y: 27}
+        - {x: -101.5, y: 27}
+        - {x: -96.5, y: 32}
+        - {x: -96.5, y: 78}
+        - {x: -103.5, y: 84}
     outline: []
   spritePackingTag: GUI Spritesheet
   userData: 
