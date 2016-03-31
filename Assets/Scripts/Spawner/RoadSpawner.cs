@@ -99,21 +99,19 @@ public class RoadSpawner : MonoBehaviour {
 
 		if (playing) {
 			if (transitionTimer < Time.time) {
-				int random = Random.Range (0, 3);
+				int random = Random.Range (0, 2);
 				if (random == 0) {
 					transitioningPlus = true;
 					if (lanes < 5) {
 						natureSpawner.IncreaseLeftOffset ();
 					}
-				} else if (random == 1) {
-					//Do nothing
 				} else {
 					transitioningMinus = true;
 					if (lanes > 3) {
 						tsm.DecreaseAllowedPositions ();
 					}
 				}
-				transitionTimer = Time.time + Random.Range (5, 10);
+				transitionTimer = Time.time + Random.Range (5, 15);
 			}
 		}
 	}

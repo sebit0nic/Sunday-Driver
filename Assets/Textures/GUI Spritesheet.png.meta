@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 5b8180d927182014086e87cdc3d4481a
-timeCreated: 1459282456
+timeCreated: 1459366875
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -17,6 +17,8 @@ TextureImporter:
     21300020: Settings Button
     21300022: Buy Button
     21300024: Crown Icon
+    21300026: Direction Button
+    21300028: Swipe Direction
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -402,6 +404,40 @@ TextureImporter:
         - {x: -96.5, y: 32}
         - {x: -96.5, y: 78}
         - {x: -103.5, y: 84}
+    - name: Direction Button
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 818
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -100, y: 100}
+        - {x: -100, y: -100}
+        - {x: 100, y: -100}
+        - {x: 100, y: 100}
+    - name: Swipe Direction
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 699
+        width: 250
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -119, y: 50}
+        - {x: -125, y: 32}
+        - {x: -125, y: -43}
+        - {x: -113, y: -50}
+        - {x: 51, y: -50}
+        - {x: 125, y: -28}
+        - {x: 125, y: 6}
+        - {x: 50, y: 50}
     outline: []
   spritePackingTag: GUI Spritesheet
   userData: 

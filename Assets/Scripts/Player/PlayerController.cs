@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour {
 	public ControlScheme controlScheme;
 
 	public GameObject[] playerModels;
+	public Image leftButton, rightButton;
+	public Image leftSwipe, rightSwipe;
 
 	private void Awake() {
 		animator = GetComponent<Animator> ();
@@ -44,11 +46,13 @@ public class PlayerController : MonoBehaviour {
 				timer = 0;
 				SetLerpValues ();
 				animator.SetTrigger ("OnSteerLeft");
+				leftSwipe.color = Color.clear;
 			} else if (Input.GetAxis ("Horizontal") > 0 && position > minPosition && timer >= inputDelay) {
 				position--;
 				timer = 0;
 				SetLerpValues ();
 				animator.SetTrigger ("OnSteerRight");
+				rightSwipe.color = Color.clear;
 			}
 
 			//Mobile (swipe)
@@ -66,10 +70,13 @@ public class PlayerController : MonoBehaviour {
 						position++;
 						SetLerpValues ();
 						animator.SetTrigger ("OnSteerLeft");
+						leftSwipe.color = Color.clear;
+
 					} else if ((fp.x - lp.x) < -50 && position > minPosition) {
 						position--;
 						SetLerpValues ();
 						animator.SetTrigger ("OnSteerRight");
+						rightSwipe.color = Color.clear;
 					}
 				}
 			}
@@ -146,5 +153,11 @@ public class PlayerController : MonoBehaviour {
 
 	public void OnMove(int direction) {
 		buttonPressDirection = direction;
+		if (direction == -1) {
+			leftButton.color = Color.clear;
+		}
+		if (direction == 1) {
+			rightButton.color = Color.clear;
+		}
 	}
 }

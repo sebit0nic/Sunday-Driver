@@ -9,10 +9,10 @@ public class NatureSpawner : MonoBehaviour {
 	private ObjectPool naturePool;
 
 	private void Start() {
-		timer = Time.time + 0.3f;
+		timer = Time.time + 0.2f;
 		naturePool = ObjectPool.CreateInstance<ObjectPool> ();
-		naturePool.Init (naturePrefab, 40, true);
-		for (int i = 0; i < 30; i++) {
+		naturePool.Init (naturePrefab, 60, true);
+		for (int i = 0; i < 40; i++) {
 			GameObject pooledObject = naturePool.GetPooledObject();
 			if (i % 2 == 0) {
 				pooledObject.transform.position = new Vector3 (Random.Range(rightMinX, rightMaxX), 0, Random.Range(-85, -10));
