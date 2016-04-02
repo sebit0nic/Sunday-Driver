@@ -66,13 +66,13 @@ public class PlayerController : MonoBehaviour {
 					lp = touch.position;
 				}
 				if (touch.phase == TouchPhase.Ended) {
-					if ((fp.x - lp.x) > 50 && position < maxPosition) {
+					if ((fp.x - lp.x) > 20 && position < maxPosition) {
 						position++;
 						SetLerpValues ();
 						animator.SetTrigger ("OnSteerLeft");
 						leftSwipe.color = Color.clear;
 
-					} else if ((fp.x - lp.x) < -50 && position > minPosition) {
+					} else if ((fp.x - lp.x) < -20 && position > minPosition) {
 						position--;
 						SetLerpValues ();
 						animator.SetTrigger ("OnSteerRight");

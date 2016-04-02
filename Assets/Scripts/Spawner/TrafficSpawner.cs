@@ -10,13 +10,13 @@ public class TrafficSpawner : MonoBehaviour {
 
 	private void Start() {
 		trafficPool = ObjectPool.CreateInstance<ObjectPool> ();
-		trafficPool.Init (traffic, 10, true);
+		trafficPool.Init (traffic, 5, true);
 		puddlePool = ObjectPool.CreateInstance<ObjectPool> ();
-		puddlePool.Init (puddle, 3, true);
+		puddlePool.Init (puddle, 2, true);
 		rockPool = ObjectPool.CreateInstance<ObjectPool> ();
 		rockPool.Init (rock, 2, true);
 		coinPool = ObjectPool.CreateInstance<ObjectPool> ();
-		coinPool.Init (coin, 3, true);
+		coinPool.Init (coin, 2, true);
 		puddleTimer = Time.time;
 		coinTimer = Time.time;
 	}

@@ -13,9 +13,12 @@ public class Score : MonoBehaviour {
 	public Text scoreText;
 	private bool gameover, stopped;
 	public Animator crownAnimator;
-	private bool animationPlayedOnce, newHighscore;
+	private bool animationPlayedOnce, newHighscore, rewardedOnce;
+	private CoinRewarder coinRewarder;
+	public GameObject highscoreLine;
 
 	private void Start() {
+		coinRewarder = GameObject.Find ("Coin Rewarder").GetComponent<CoinRewarder> ();
 		if (clearMemory) {
 			PlayerPrefs.DeleteAll ();
 		}
@@ -41,7 +44,7 @@ public class Score : MonoBehaviour {
 				endscoreText.text = score.ToString ();
 				endscoreShadow.text = score.ToString ();
 				if (!animationPlayedOnce && newHighscore) {
-					crownAnimator.SetTrigger ("OnNewHighscore");
+					crownAnimator.SetTrigger ("OnPop");
 					animationPlayedOnce = true;
 				}
 			}
@@ -55,10 +58,18 @@ public class Score : MonoBehaviour {
 				highscoreShadow.text = "Top: " + highscore.ToString ();
 			}
 		}
+		if (score == highscore - 3 && highscore != 0) {
+			highscoreLine.SetActive (true);
+		}
 	}
 
 	public void OnGameOver() {
 		gameover = true;
+		if (!rewardedOnce) {
+			coinRewarder.CheckBanner (highscore < score);
+			rewardedOnce = true;
+		}
+
 		if (highscore < score) {
 			highscore = score;
 			PlayerPrefs.SetInt ("Highscore", highscore);
@@ -84,5 +95,8 @@ public class Score : MonoBehaviour {
 		stopped = false;
 		animationPlayedOnce = false;
 		newHighscore = false;
+		rewardedOnce = false;
+		highscoreLine.transform.position = new Vector3 (0, 0, -90);
+		highscoreLine.SetActive (false);
 	}
 }
