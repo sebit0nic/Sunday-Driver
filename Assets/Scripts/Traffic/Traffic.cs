@@ -5,6 +5,7 @@ public class Traffic : MonoBehaviour {
 
 	public GameObject[] carModels;
 	public Material[] allPaintJobs;
+	public ParticleSystem crashParticles;
 	private MeshRenderer meshRenderer;
 	private int moveSpeed;
 	private Quaternion initialRotation;
@@ -18,6 +19,7 @@ public class Traffic : MonoBehaviour {
 	public void Init(int moveSpeed, Vector3 position) {
 		this.moveSpeed = moveSpeed;
 		crashed = false;
+		crashParticles.gameObject.SetActive (false);
 		transform.position = position;
 		transform.rotation = initialRotation;
 		for (int i = 0; i < carModels.Length; i++) {
@@ -51,6 +53,10 @@ public class Traffic : MonoBehaviour {
 		if (coll.gameObject.tag.Equals ("Player")) {
 			moveSpeed = 0;
 			crashed = true;
+		}
+		if (coll.gameObject.tag.Equals ("Obstacle") || coll.gameObject.tag.Equals("Traffic")) {
+			crashParticles.gameObject.SetActive (true);
+			moveSpeed = 25;
 		}
 	}
 }

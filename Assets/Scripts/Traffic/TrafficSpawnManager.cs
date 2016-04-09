@@ -12,7 +12,7 @@ public class TrafficSpawnManager : MonoBehaviour {
 	public float[] timer;
 	public float blockTimer = 0, blockInterval = 3;
 	public float difficultyTimer = 0, difficultyInterval = 5;
-	private int puddleProbability = 5, coinProbability = 15;
+	private int puddleProbability = 7, coinProbability = 10, rockProbability = 10, treeProbability = 10;
 
 	private void Start () {
 		trafficSpawner = GetComponentsInChildren<TrafficSpawner> ();
@@ -37,10 +37,6 @@ public class TrafficSpawnManager : MonoBehaviour {
 		}
 		if (blockTimer < Time.time) {
 			timer [blockedPosition] = Time.time + Random.Range (1f, 2f);
-			if (Random.Range (0, 3) == 0 && allowedPositions > 3) {
-				trafficSpawner [blockedPosition].SpawnRock (blockedPosition);
-			}
-
 			blockedPosition = Random.Range (0, allowedPositions);
 			blockTimer = Time.time + blockInterval;
 		}
@@ -54,8 +50,8 @@ public class TrafficSpawnManager : MonoBehaviour {
 			if (blockInterval > 1f) {
 				blockInterval -= 0.1f;
 			}
-			if (maxSpawnTime > 1f) {
-				maxSpawnTime -= 0.25f;
+			if (maxSpawnTime > 1.6f) {
+				maxSpawnTime -= 0.2f;
 			}
 			if (currentSpeed == 20 && minSpawnTime > 0.25f) {
 				minSpawnTime -= 0.25f;
@@ -69,6 +65,26 @@ public class TrafficSpawnManager : MonoBehaviour {
 		if (Random.Range (0, puddleProbability) == 0) {
 			int random = Random.Range (0, allowedPositions);
 			trafficSpawner [random].SpawnPuddle (random);
+		}  else if (Random.Range (0, rockProbability) == 0 && allowedPositions > 3) {
+			int random = Random.Range (0, allowedPositions);
+			trafficSpawner [random].SpawnRock (random);
+		} else if (Random.Range (0, treeProbability) == 0 && allowedPositions > 3) {
+			switch (allowedPositions) {
+			case 4:
+				if (blockedPosition > 1) {
+					trafficSpawner [0].SpawnTree (-1.75f);
+				} else {
+					trafficSpawner [0].SpawnTree (6.15f);
+				}
+				break;
+			case 5:
+				if (blockedPosition > 1) {
+					trafficSpawner [0].SpawnTree (-1.75f);
+				} else {
+					trafficSpawner [0].SpawnTree (7.5f);
+				}
+				break;
+			}
 		} else if (Random.Range (0, coinProbability) == 0) {
 			int random = Random.Range (0, allowedPositions);
 			trafficSpawner [random].SpawnCoin (random);

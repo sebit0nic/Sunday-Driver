@@ -54,7 +54,7 @@ public class PlayerCollision : MonoBehaviour {
 	}
 
 	private void OnCollisionEnter(Collision other) {
-		if (other.gameObject.tag.Equals ("Traffic") || other.gameObject.tag.Equals("Rock")) {
+		if (other.gameObject.tag.Equals ("Traffic") || other.gameObject.tag.Equals("Obstacle")) {
 			crashed = true;
 			tsm.gameObject.SetActive (false);
 			playerController.enabled = false;
@@ -103,7 +103,7 @@ public class PlayerCollision : MonoBehaviour {
 			}
 		}
 
-		if (other.gameObject.tag.Equals ("Puddle") && !screenShakedOnce) {
+		if (other.gameObject.tag.Equals ("Slipable") && !screenShakedOnce) {
 			animator.SetTrigger ("OnSpin");
 		}
 
@@ -152,11 +152,11 @@ public class PlayerCollision : MonoBehaviour {
 		for (int i = 0; i < destroyableObjects.Length; i++) {
 			destroyableObjects[i].SetActive(false);
 		}
-		destroyableObjects = GameObject.FindGameObjectsWithTag ("Puddle");
+		destroyableObjects = GameObject.FindGameObjectsWithTag ("Slipable");
 		for (int i = 0; i < destroyableObjects.Length; i++) {
 			destroyableObjects[i].SetActive(false);
 		}
-		destroyableObjects = GameObject.FindGameObjectsWithTag ("Rock");
+		destroyableObjects = GameObject.FindGameObjectsWithTag ("Obstacle");
 		for (int i = 0; i < destroyableObjects.Length; i++) {
 			destroyableObjects[i].SetActive(false);
 		}

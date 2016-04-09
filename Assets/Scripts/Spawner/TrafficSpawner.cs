@@ -3,10 +3,10 @@ using System.Collections;
 
 public class TrafficSpawner : MonoBehaviour {
 
-	public GameObject traffic, puddle, rock, coin;
-	public bool canSpawn = true;
-	private ObjectPool trafficPool, puddlePool, rockPool, coinPool;
-	private float puddleTimer, coinTimer;
+	public GameObject traffic, puddle, rock, coin, tree;
+	public bool canSpawn = true, canSpawnTree = false;
+	private ObjectPool trafficPool, puddlePool, rockPool, coinPool, treePool;
+	private float puddleTimer, coinTimer, treeTimer;
 
 	private void Start() {
 		trafficPool = ObjectPool.CreateInstance<ObjectPool> ();
@@ -17,8 +17,13 @@ public class TrafficSpawner : MonoBehaviour {
 		rockPool.Init (rock, 2, true);
 		coinPool = ObjectPool.CreateInstance<ObjectPool> ();
 		coinPool.Init (coin, 2, true);
+		if (canSpawnTree) {
+			treePool = ObjectPool.CreateInstance<ObjectPool> ();
+			treePool.Init (tree, 2, true);
+		}
 		puddleTimer = Time.time;
 		coinTimer = Time.time;
+		treeTimer = Time.time;
 	}
 
 	public void Spawn (int moveSpeed) {
@@ -53,6 +58,16 @@ public class TrafficSpawner : MonoBehaviour {
 			coinInstance.transform.position = new Vector3 (transform.position.x, 0.5f, transform.position.z);
 			coinInstance.SetActive (true);
 			coinTimer += 0.5f;
+		}
+	}
+
+	public void SpawnTree(float positionX) {
+		if (canSpawnTree && treeTimer < Time.time) {
+			GameObject treeInstance = treePool.GetPooledObject ();
+			treeInstance.transform.position = new Vector3 (positionX, 0.07f, transform.position.z);
+			treeInstance.transform.Rotate (-90, 0, 0);
+			treeInstance.SetActive (true);
+			treeTimer += 1f;
 		}
 	}
 
