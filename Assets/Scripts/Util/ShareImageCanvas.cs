@@ -5,45 +5,36 @@ using UnityEngine.UI;
 
 public class ShareImageCanvas : MonoBehaviour {
 	
-	private bool isProcessing = false;
-	public Image buttonShare;
-	private string subject = "New highscore on Sunday Driver!", message;
+	public string ScreenshotName = "screenshot.png";
 
-	public void ButtonShare () {
-		message = "My highscore on #sundaydriver is "+PlayerPrefs.GetInt("Highscore")+"!";
-		buttonShare.enabled = false;
-		if(!isProcessing){
-			StartCoroutine(ShareScreenshot());
-		}
+	public void ShareScreenshotWithText() {
+		string screenShotPath = Application.persistentDataPath + "/" + ScreenshotName;
+		Application.CaptureScreenshot(ScreenshotName);
+		Share("My highscore on #sundaydriver is "+PlayerPrefs.GetInt("Highscore")+"!",screenShotPath,"");
 	}
 
-	public IEnumerator ShareScreenshot() {
-		isProcessing = true;
-		// wait for graphics to render
-		yield return new WaitForEndOfFrame();
-		string destination = Path.Combine(Application.persistentDataPath, System.DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + ".png");
-		Application.CaptureScreenshot (destination);
-		if(!Application.isEditor) {
-			// block to open the file and share it ------------START
-			AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
-			AndroidJavaObject intentObject = new AndroidJavaObject("android.content.Intent");
-			intentObject.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
-			AndroidJavaClass uriClass = new AndroidJavaClass("android.net.Uri");
-			AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse","file://" + destination);
-			intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"), uriObject);
+	public void Share(string shareText, string imagePath, string url, string subject = "") {
+		#if UNITY_ANDROID
+		AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
+		AndroidJavaObject intentObject = new AndroidJavaObject("android.content.Intent");
 
-			intentObject.Call<AndroidJavaObject> ("setType", "text/plain");
-			intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), ""+ message);
-			intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TITLE"), ""+ subject);
-			intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_SUBJECT"), ""+subject);
+		intentObject.Call<AndroidJavaObject>("setAction", intentClass.GetStatic<string>("ACTION_SEND"));
+		AndroidJavaClass uriClass = new AndroidJavaClass("android.net.Uri");
+		AndroidJavaObject uriObject = uriClass.CallStatic<AndroidJavaObject>("parse", "file://" + imagePath);
+		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_STREAM"), uriObject);
+		intentObject.Call<AndroidJavaObject>("setType", "image/png");
 
-			intentObject.Call<AndroidJavaObject>("setType", "image/jpeg");
-			AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-			AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
+		intentObject.Call<AndroidJavaObject>("putExtra", intentClass.GetStatic<string>("EXTRA_TEXT"), shareText);
 
-			currentActivity.Call("startActivity", intentObject);
-		}
-		isProcessing = false;
-		buttonShare.enabled = true;
+		AndroidJavaClass unity = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+		AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
+
+		AndroidJavaObject jChooser = intentClass.CallStatic<AndroidJavaObject>("createChooser", intentObject, subject);
+		currentActivity.Call("startActivity", jChooser);
+		#elif UNITY_IOS
+		CallSocialShareAdvanced(shareText, subject, url, imagePath);
+		#else
+		Debug.Log("No sharing set up for this platform.");
+		#endif
 	}
 }
