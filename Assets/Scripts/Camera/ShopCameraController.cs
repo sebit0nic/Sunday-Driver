@@ -8,11 +8,14 @@ public class ShopCameraController : MonoBehaviour {
 	private bool isMobile = false;
 	public int selectedCar = 0;
 	public SelectableCar[] cars;
+	public Color[] backgroundColors;
 	private bool[] bought;
 	public GameObject selectButton, buyButton;
 	public CoinCounter coinCounter;
+	private Camera thisCamera;
 
 	private void Start() {
+		thisCamera = GetComponent<Camera> ();
 		tempVector = transform.position;
 		bought = new bool[cars.Length];
 		if (Application.platform == RuntimePlatform.Android) {
@@ -55,6 +58,7 @@ public class ShopCameraController : MonoBehaviour {
 	public void SetFocusX(float focusX, int index) {
 		this.focusX = focusX;
 		selectedCar = index;
+		thisCamera.backgroundColor = backgroundColors [selectedCar];
 		if (bought [index]) {
 			selectButton.SetActive (true);
 			buyButton.SetActive (false);

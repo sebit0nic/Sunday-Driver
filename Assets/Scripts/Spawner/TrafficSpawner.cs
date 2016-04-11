@@ -19,7 +19,7 @@ public class TrafficSpawner : MonoBehaviour {
 		coinPool.Init (coin, 2, true);
 		if (canSpawnTree) {
 			treePool = ObjectPool.CreateInstance<ObjectPool> ();
-			treePool.Init (tree, 2, true);
+			treePool.Init (tree, 4, true);
 		}
 		puddleTimer = Time.time;
 		coinTimer = Time.time;

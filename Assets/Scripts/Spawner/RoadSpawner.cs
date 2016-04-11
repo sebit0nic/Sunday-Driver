@@ -99,7 +99,7 @@ public class RoadSpawner : MonoBehaviour {
 
 		if (playing) {
 			if (transitionTimer < Time.time) {
-				int random = Random.Range (0, 1);
+				int random = Random.Range (0, 2);
 				if (random == 0) {
 					transitioningPlus = true;
 					if (lanes < 5) {

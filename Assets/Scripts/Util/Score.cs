@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
+using System.Collections.Generic;
 
 public class Score : MonoBehaviour {
 
@@ -67,6 +69,15 @@ public class Score : MonoBehaviour {
 		gameover = true;
 		if (!rewardedOnce) {
 			coinRewarder.CheckBanner (highscore < score);
+
+			Analytics.CustomEvent ("GameOver", new Dictionary<string, object> {
+				{ "Score", score },
+				{ "Highscore", highscore },
+				{ "Coins", PlayerPrefs.GetInt ("Coins") },
+				{ "Selected Car", PlayerPrefs.GetInt ("SelectedCar") },
+				{ "Controlscheme", PlayerPrefs.GetInt ("Controls") }
+			});
+
 			rewardedOnce = true;
 		}
 
