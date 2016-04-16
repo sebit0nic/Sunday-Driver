@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 public class ShopCameraController : MonoBehaviour {
 
@@ -30,6 +32,7 @@ public class ShopCameraController : MonoBehaviour {
 				bought [i] = true;
 			}
 		}
+		CheckAchievement ();
 	}
 
 	private void Update() {
@@ -71,6 +74,7 @@ public class ShopCameraController : MonoBehaviour {
 	public void SelectCar() {
 		PlayerPrefs.SetInt ("SelectedCar", selectedCar);
 		PlayerPrefs.Save ();
+		CheckAchievement ();
 	}
 
 	public void BuyCar() {
@@ -84,6 +88,20 @@ public class ShopCameraController : MonoBehaviour {
 			buyButton.SetActive (false);
 			coinCounter.Refresh ();
 			SelectCar ();
+			CheckAchievement ();
+		}
+	}
+
+	private void CheckAchievement() {
+		int temp = 0;
+		for (int i = 0; i < bought.Length; i++) {
+			if (bought [i]) {
+				temp++;
+			}
+		}
+		if (temp >= 10) {
+			Social.ReportProgress("CgkInvGGzfYUEAIQBQ", 100.0f, (bool success) => {
+			});
 		}
 	}
 }

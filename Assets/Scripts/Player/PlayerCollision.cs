@@ -105,6 +105,7 @@ public class PlayerCollision : MonoBehaviour {
 
 		if (other.gameObject.tag.Equals ("Slipable") && !screenShakedOnce) {
 			animator.SetTrigger ("OnSpin");
+			score.SetSlippedOnce ();
 		}
 
 		if (other.gameObject.tag.Equals ("Coin")) {

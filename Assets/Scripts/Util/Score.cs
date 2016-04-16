@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Analytics;
 using System.Collections.Generic;
+using GooglePlayGames;
+using UnityEngine.SocialPlatforms;
 
 public class Score : MonoBehaviour {
 
@@ -18,6 +20,7 @@ public class Score : MonoBehaviour {
 	private bool animationPlayedOnce, newHighscore, rewardedOnce;
 	private CoinRewarder coinRewarder;
 	public GameObject highscoreLine;
+	public bool slippedOnce = false;
 
 	private void Start() {
 		coinRewarder = GameObject.Find ("Coin Rewarder").GetComponent<CoinRewarder> ();
@@ -78,6 +81,24 @@ public class Score : MonoBehaviour {
 				{ "Controlscheme", PlayerPrefs.GetInt ("Controls") }
 			});
 
+
+			if (score >= 50) {
+				Social.ReportProgress("CgkInvGGzfYUEAIQAg", 100.0f, (bool success) => {
+				});
+			}
+			if (score >= 200) {
+				Social.ReportProgress("CgkInvGGzfYUEAIQAw", 100.0f, (bool success) => {
+				});
+			}
+			if (score >= 500) {
+				Social.ReportProgress("CgkInvGGzfYUEAIQBA", 100.0f, (bool success) => {
+				});
+			}
+			if (score >= 100 && !slippedOnce) {
+				Social.ReportProgress("CgkInvGGzfYUEAIQBg", 100.0f, (bool success) => {
+				});
+			}
+
 			rewardedOnce = true;
 		}
 
@@ -91,6 +112,10 @@ public class Score : MonoBehaviour {
 
 	public void SetStopped() {
 		stopped = true;
+	}
+
+	public void SetSlippedOnce() {
+		slippedOnce = true;
 	}
 
 	public void Reset() {
@@ -109,5 +134,18 @@ public class Score : MonoBehaviour {
 		rewardedOnce = false;
 		highscoreLine.transform.position = new Vector3 (0, 0, -90);
 		highscoreLine.SetActive (false);
+		slippedOnce = false;
+	}
+
+	public void ShowGooglePlayHighscores() {
+		Social.localUser.Authenticate((bool success) => {
+			if (success) {
+				Social.ReportScore(highscore, "CgkInvGGzfYUEAIQAQ", (bool success2) => {
+					if (success2) {
+						Social.ShowAchievementsUI();
+					}
+				});
+			}
+		});
 	}
 }
