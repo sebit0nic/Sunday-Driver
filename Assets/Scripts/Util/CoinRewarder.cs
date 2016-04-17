@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
 
 public class CoinRewarder : MonoBehaviour {
 
@@ -9,6 +10,8 @@ public class CoinRewarder : MonoBehaviour {
 	public Text bannerText, coinText;
 	public GameObject freeButton, shareButton, adButton;
 	public long nextFreeTimestamp, nextAdTimestamp;
+	public Animator coins, coinsIcon;
+	public CoinCounter coinCounter;
 
 	private void Start() {
 		string temp = PlayerPrefs.GetString ("NextFreeTimestamp");
@@ -67,6 +70,21 @@ public class CoinRewarder : MonoBehaviour {
 		PlayerPrefs.Save ();
 	}
 
+	public void OnSuccessfulTransaction(int mode) {
+		coins.SetTrigger ("OnPop");
+		coinsIcon.SetTrigger ("OnPop");
+		bannerText.text = "";
+		if (mode == 0) {
+			freeButton.SetActive (false);
+			SetFreeTimestamp ();
+		} else {
+			adButton.SetActive (false);
+			SetAdTimestamp ();
+		}
+		RewardCoins ();
+		coinCounter.Refresh ();
+	}
+
 	public void Reset() {
 		banner.SetActive (false);
 		bannerText.gameObject.SetActive (true);
@@ -75,5 +93,27 @@ public class CoinRewarder : MonoBehaviour {
 		shareButton.SetActive (false);
 		adButton.SetActive (false);
 		bannerText.text = "";
+	}
+
+	public void ShowRewardedAd() {
+		if (Advertisement.IsReady("rewardedVideo")) {
+			var options = new ShowOptions { resultCallback = HandleShowResult };
+			Advertisement.Show("rewardedVideo", options);
+		}
+	}
+
+	private void HandleShowResult(ShowResult result) {
+		switch (result) {
+		case ShowResult.Finished:
+			Debug.Log ("The ad was successfully shown.");
+			OnSuccessfulTransaction (1);
+			break;
+		case ShowResult.Skipped:
+			Debug.Log("The ad was skipped before reaching the end.");
+			break;
+		case ShowResult.Failed:
+			Debug.LogError("The ad failed to be shown.");
+			break;
+		}
 	}
 }

@@ -80,8 +80,7 @@ public class Score : MonoBehaviour {
 				{ "Selected Car", PlayerPrefs.GetInt ("SelectedCar") },
 				{ "Controlscheme", PlayerPrefs.GetInt ("Controls") }
 			});
-
-
+				
 			if (score >= 50) {
 				Social.ReportProgress("CgkInvGGzfYUEAIQAg", 100.0f, (bool success) => {
 				});
@@ -138,11 +137,12 @@ public class Score : MonoBehaviour {
 	}
 
 	public void ShowGooglePlayHighscores() {
+		PlayGamesPlatform.Activate ();
 		Social.localUser.Authenticate((bool success) => {
 			if (success) {
 				Social.ReportScore(highscore, "CgkInvGGzfYUEAIQAQ", (bool success2) => {
 					if (success2) {
-						Social.ShowAchievementsUI();
+						Social.ShowLeaderboardUI();
 					}
 				});
 			}

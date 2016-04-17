@@ -42,6 +42,7 @@ public class PlayerCollision : MonoBehaviour {
 			Time.timeScale = 0.025f;
 			if (!canvasActivatedOnce) {
 				gameoverCanvas.SetActive (true);
+				coinCounter.OnGameOver ();
 				canvasActivatedOnce = true;
 			}
 			score.OnGameOver ();

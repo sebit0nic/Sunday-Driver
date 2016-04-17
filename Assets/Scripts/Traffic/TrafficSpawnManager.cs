@@ -12,7 +12,7 @@ public class TrafficSpawnManager : MonoBehaviour {
 	public float[] timer;
 	public float blockTimer = 0, blockInterval = 3;
 	public float difficultyTimer = 0, difficultyInterval = 5;
-	private int puddleProbability = 5, coinProbability = 10, rockProbability = 9, treeProbability = 7;
+	private int puddleProbability = 4, coinProbability = 10, rockProbability = 9, treeProbability = 7;
 
 	private void Start () {
 		trafficSpawner = GetComponentsInChildren<TrafficSpawner> ();
