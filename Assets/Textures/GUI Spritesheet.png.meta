@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 5b8180d927182014086e87cdc3d4481a
-timeCreated: 1459366875
+timeCreated: 1460922351
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -19,6 +19,8 @@ TextureImporter:
     21300024: Crown Icon
     21300026: Direction Button
     21300028: Swipe Direction
+    21300030: Free Button
+    21300032: Share Button
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -438,6 +440,103 @@ TextureImporter:
         - {x: 125, y: -28}
         - {x: 125, y: 6}
         - {x: 50, y: 50}
+    - name: Free Button
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 818
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -82, y: 100}
+        - {x: -100, y: 54}
+        - {x: -100, y: -62}
+        - {x: -73, y: -95}
+        - {x: -57, y: -100}
+        - {x: 59, y: -100}
+        - {x: 100, y: -57}
+        - {x: 100, y: 59}
+        - {x: 51, y: 100}
+      - - {x: -8, y: 31}
+        - {x: -12, y: 37}
+        - {x: -21, y: 45}
+        - {x: 1, y: 34}
+        - {x: 20, y: 72}
+        - {x: 18, y: 76}
+        - {x: 40, y: 54}
+        - {x: 32, y: 49}
+        - {x: 20, y: 42}
+        - {x: 13, y: 35}
+        - {x: 13, y: 34}
+        - {x: 16, y: 31}
+      - - {x: -53, y: 3}
+        - {x: -53, y: -61}
+        - {x: -9, y: -61}
+        - {x: -9, y: 1}
+        - {x: -11, y: 3}
+      - - {x: 5, y: -61}
+        - {x: 49, y: -61}
+        - {x: 49, y: 3}
+        - {x: 5, y: 3}
+      - - {x: -63, y: 28}
+        - {x: -63, y: 4}
+        - {x: -11, y: 4}
+        - {x: -9, y: 6}
+        - {x: -9, y: 26}
+        - {x: -11, y: 28}
+      - - {x: 7, y: 28}
+        - {x: 5, y: 26}
+        - {x: 5, y: 6}
+        - {x: 7, y: 4}
+        - {x: 56, y: 4}
+        - {x: 58, y: 6}
+        - {x: 58, y: 26}
+        - {x: 56, y: 28}
+      - - {x: 19, y: 71}
+        - {x: 15, y: 70}
+        - {x: 2, y: 37}
+        - {x: 2, y: 34}
+        - {x: 4, y: 32}
+        - {x: 31, y: 44}
+        - {x: 37, y: 52}
+        - {x: 37, y: 59}
+        - {x: 23, y: 71}
+      - - {x: -18, y: 64}
+        - {x: -30, y: 55}
+        - {x: -30, y: 50}
+        - {x: -10, y: 34}
+        - {x: -6, y: 34}
+        - {x: -5, y: 35}
+        - {x: -5, y: 44}
+        - {x: -12, y: 62}
+        - {x: -15, y: 64}
+    - name: Share Button
+      rect:
+        serializedVersion: 2
+        x: 815
+        y: 816
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 55, y: 97}
+        - {x: 35, y: 100}
+        - {x: -32, y: 100}
+        - {x: -61, y: 89}
+        - {x: -99, y: 56}
+        - {x: -100, y: 48}
+        - {x: -100, y: -39}
+        - {x: -68, y: -89}
+        - {x: -37, y: -100}
+        - {x: 36, y: -100}
+        - {x: 73, y: -85}
+        - {x: 100, y: -41}
+        - {x: 100, y: 45}
     outline: []
   spritePackingTag: GUI Spritesheet
   userData: 
