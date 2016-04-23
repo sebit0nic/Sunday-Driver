@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 6b1e0fc44b845c0448d587e1fd857223
-timeCreated: 1460486881
+guid: d8e70837d59b26646b112919fc09956e
+timeCreated: 1461412524
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -27,8 +27,8 @@ ModelImporter:
     3300004: Car
     3300006: Front Left Tire
     3300008: Front Right Tire
-    4300000: Back Right Tire
-    4300002: Front Right Tire
+    4300000: Front Right Tire
+    4300002: Back Right Tire
     4300004: Back Left Tire
     4300006: Front Left Tire
     4300008: Car
@@ -73,8 +73,8 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 0
-    normalImportMode: 0
-    tangentImportMode: 0
+    normalImportMode: 1
+    tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
