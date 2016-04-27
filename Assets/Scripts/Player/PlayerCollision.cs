@@ -44,6 +44,8 @@ public class PlayerCollision : MonoBehaviour {
 				gameoverCanvas.SetActive (true);
 				coinCounter.OnGameOver ();
 				canvasActivatedOnce = true;
+				roadSpawner.ChangeVolume (-3);
+				roadSpawner.ChangePitch (1);
 			}
 			score.OnGameOver ();
 			gameCanvas.SetActive (false);
@@ -67,6 +69,7 @@ public class PlayerCollision : MonoBehaviour {
 				crashText.SetActive (true);
 				crashAnimator.SetTrigger ("OnStart");
 				score.SetStopped ();
+				roadSpawner.ChangePitch (0.5f);
 			}
 			Time.timeScale = 0.1f;
 			marker.SetActive (false);

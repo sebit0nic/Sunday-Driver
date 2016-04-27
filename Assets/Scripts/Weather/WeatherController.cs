@@ -110,11 +110,11 @@ public class WeatherController : MonoBehaviour {
 					snow.SetActive (true);
 					tempIntensity -= Time.deltaTime * 0.4f;
 					mainLight.intensity = tempIntensity;
-					snow.transform.position = Vector3.Lerp (snow.transform.position, new Vector3 (-20f, 21.3f, -2.9f), Time.deltaTime * 0.5f);
+					snow.transform.position = Vector3.Lerp (snow.transform.position, new Vector3 (-8f, 3.8f, -7.4f), Time.deltaTime * 0.5f);
 					if (tempIntensity <= 0.8f) {
 						tempIntensity = 0.8f;
 					}
-					if (snow.transform.position.x >= -21) {
+					if (snow.transform.position.x >= -9) {
 						transitioning = false;
 						state = 2;
 					}

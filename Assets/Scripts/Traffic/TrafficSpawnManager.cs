@@ -7,6 +7,7 @@ public class TrafficSpawnManager : MonoBehaviour {
 	public int maxAllowedTraffic = 10, currentTrafficCount = 0, allowedPositions = 3, blockedPosition = 0;
 	public int currentSpeed = 10;
 	public float minSpawnTime = 0.75f, maxSpawnTime = 3;
+	public RoadSpawner roadSpawner;
 
 	[Header("Timer")]
 	public float[] timer;
@@ -32,6 +33,7 @@ public class TrafficSpawnManager : MonoBehaviour {
 				if (currentTrafficCount < maxAllowedTraffic && i != blockedPosition) {
 					trafficSpawner [i].Spawn (currentSpeed);
 					currentTrafficCount++;
+					roadSpawner.ChangeVolume (0.025f);
 				}
 			}
 		}
@@ -101,6 +103,7 @@ public class TrafficSpawnManager : MonoBehaviour {
 		blockedPosition = Random.Range (0, allowedPositions);
 		blockTimer = Time.time + blockInterval;
 		currentTrafficCount = 0;
+		roadSpawner.ChangeVolume (-3);
 		transform.position = new Vector3 (transform.position.x, transform.position.y, -40);
 		for (int i = 0; i < timer.Length; i++) {
 			timer [i] = Time.time + Random.Range (0f, 1f);

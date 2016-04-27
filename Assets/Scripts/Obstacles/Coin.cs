@@ -9,10 +9,12 @@ public class Coin : MonoBehaviour {
 	private BoxCollider thisBoxCollider;
 	private float timeout;
 	public Animator thisAnimator;
+	private AudioSource thisAudioSource;
 
 	private void Awake() {
 		thisBoxCollider = GetComponent<BoxCollider> ();
 		psemit = particles.emission;
+		thisAudioSource = GetComponent<AudioSource> ();
 	}
 
 	private void Update() {
@@ -29,6 +31,7 @@ public class Coin : MonoBehaviour {
 				psemit.enabled = true;
 				particles.Play ();
 			}
+			thisAudioSource.Play ();
 			playedOnce = true;
 			timeout = Time.time + 0.5f;
 			thisBoxCollider.enabled = false;

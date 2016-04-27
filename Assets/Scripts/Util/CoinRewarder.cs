@@ -12,6 +12,7 @@ public class CoinRewarder : MonoBehaviour {
 	public long nextFreeTimestamp, nextAdTimestamp;
 	public Animator coins, coinsIcon;
 	public CoinCounter coinCounter;
+	private AudioSource rewardSound;
 
 	private void Start() {
 		string temp = PlayerPrefs.GetString ("NextFreeTimestamp");
@@ -29,6 +30,7 @@ public class CoinRewarder : MonoBehaviour {
 		} else {
 			nextAdTimestamp = long.Parse (temp);
 		}
+		rewardSound = GameObject.Find ("Main Camera").GetComponent<AudioSource> ();
 
 		PlayerPrefs.Save ();
 	}
@@ -82,6 +84,7 @@ public class CoinRewarder : MonoBehaviour {
 			SetAdTimestamp ();
 		}
 		RewardCoins ();
+		rewardSound.Play ();
 		coinCounter.Refresh ();
 	}
 

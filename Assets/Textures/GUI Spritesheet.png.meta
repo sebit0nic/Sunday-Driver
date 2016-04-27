@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 5b8180d927182014086e87cdc3d4481a
-timeCreated: 1460922351
+timeCreated: 1461791738
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -21,6 +21,7 @@ TextureImporter:
     21300028: Swipe Direction
     21300030: Free Button
     21300032: Share Button
+    21300034: No Sound Button
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -518,6 +519,30 @@ TextureImporter:
         serializedVersion: 2
         x: 815
         y: 816
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 55, y: 97}
+        - {x: 35, y: 100}
+        - {x: -32, y: 100}
+        - {x: -61, y: 89}
+        - {x: -99, y: 56}
+        - {x: -100, y: 48}
+        - {x: -100, y: -39}
+        - {x: -68, y: -89}
+        - {x: -37, y: -100}
+        - {x: 36, y: -100}
+        - {x: 73, y: -85}
+        - {x: 100, y: -41}
+        - {x: 100, y: 45}
+    - name: No Sound Button
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 820
         width: 200
         height: 200
       alignment: 0

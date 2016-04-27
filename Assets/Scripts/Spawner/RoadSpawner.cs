@@ -13,11 +13,13 @@ public class RoadSpawner : MonoBehaviour {
 	private float transitionTimer;
 	public TrafficSpawnManager tsm;
 	public NatureSpawner natureSpawner;
+	private AudioSource thisAudioSource;
 
 	private bool playing = false;
 
 	private void Awake() {
 		parent = GameObject.Find ("Instantiated Objects");
+		thisAudioSource = GetComponent<AudioSource> ();
 	}
 
 	private void Start() {
@@ -143,5 +145,15 @@ public class RoadSpawner : MonoBehaviour {
 
 	public void DecreaseLanes() {
 		transitioningMinus = true;
+	}
+
+	public void ChangeVolume(float newVolume) {
+		if (thisAudioSource.volume + newVolume <= 0.3f) {
+			thisAudioSource.volume += newVolume;
+		}
+	}
+
+	public void ChangePitch(float newPitch) {
+		thisAudioSource.pitch = newPitch;
 	}
 }

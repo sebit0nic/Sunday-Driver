@@ -11,6 +11,11 @@ public class Traffic : MonoBehaviour {
 	private Quaternion initialRotation;
 	private Vector3 initialPosition;
 	private bool crashed;
+	private CapsuleCollider thisCollider;
+
+	private void Awake() {
+		thisCollider = GetComponent<CapsuleCollider> ();
+	}
 
 	private void Start() {
 		initialRotation = transform.rotation;
@@ -18,6 +23,7 @@ public class Traffic : MonoBehaviour {
 
 	public void Init(int moveSpeed, Vector3 position) {
 		this.moveSpeed = moveSpeed;
+		thisCollider.enabled = false;
 		crashed = false;
 		crashParticles.gameObject.SetActive (false);
 		transform.position = position;
@@ -38,6 +44,10 @@ public class Traffic : MonoBehaviour {
 		} else {
 			transform.position = Vector3.Lerp (transform.position, new Vector3 (Random.Range(-5f, 5f), 0, 30), Time.deltaTime * 2.5f);
 			transform.Rotate (0, 10, 0);
+		}
+
+		if (transform.position.z >= -31.5f && !thisCollider.enabled) {
+			thisCollider.enabled = true;
 		}
 	}
 

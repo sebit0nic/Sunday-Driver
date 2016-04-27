@@ -20,7 +20,8 @@ public class Score : MonoBehaviour {
 	private bool animationPlayedOnce, newHighscore, rewardedOnce;
 	private CoinRewarder coinRewarder;
 	public GameObject highscoreLine;
-	public bool slippedOnce = false;
+	private bool slippedOnce = false;
+	private AudioSource countSound, celebrationSound;
 
 	private void Start() {
 		coinRewarder = GameObject.Find ("Coin Rewarder").GetComponent<CoinRewarder> ();
@@ -28,6 +29,14 @@ public class Score : MonoBehaviour {
 			PlayerPrefs.DeleteAll ();
 		}
 		highscore = PlayerPrefs.GetInt ("Highscore");
+		celebrationSound = GetComponents<AudioSource> () [0];
+		countSound = GetComponents<AudioSource> () [1];
+
+		if (PlayerPrefs.GetInt ("Sound", 0) == 0) {
+			AudioListener.volume = 1;
+		} else {
+			AudioListener.volume = 0;
+		}
 	}
 
 	private void Update() {
@@ -42,6 +51,10 @@ public class Score : MonoBehaviour {
 		if (gameover) {
 			if (tempScore < score) {
 				tempFloatScore += Time.unscaledDeltaTime * score;
+				if (Mathf.RoundToInt (tempFloatScore) > tempScore) {
+					countSound.Play ();
+					countSound.pitch += 0.01f;
+				}
 				tempScore = Mathf.RoundToInt (tempFloatScore);
 				endscoreText.text = tempScore.ToString ();
 				endscoreShadow.text = tempScore.ToString ();
@@ -51,6 +64,7 @@ public class Score : MonoBehaviour {
 				if (!animationPlayedOnce && newHighscore) {
 					crownAnimator.SetTrigger ("OnPop");
 					animationPlayedOnce = true;
+					celebrationSound.Play ();
 				}
 			}
 			if (tempHighscore < highscore) {
@@ -134,6 +148,7 @@ public class Score : MonoBehaviour {
 		highscoreLine.transform.position = new Vector3 (0, 0, -90);
 		highscoreLine.SetActive (false);
 		slippedOnce = false;
+		countSound.pitch = 1;
 	}
 
 	public void ShowGooglePlayHighscores() {
