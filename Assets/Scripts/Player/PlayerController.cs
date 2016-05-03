@@ -26,10 +26,13 @@ public class PlayerController : MonoBehaviour {
 	public Image leftButton, rightButton;
 	public Image leftSwipe, rightSwipe;
 
+	private AudioSource skidSound;
+
 	private void Awake() {
 		animator = GetComponent<Animator> ();
 		initialPosition = transform.position;
 		initialRotation = transform.rotation;
+		skidSound = GetComponents<AudioSource> () [1];
 	}
 
 	private void Start() {
@@ -46,12 +49,16 @@ public class PlayerController : MonoBehaviour {
 				timer = 0;
 				SetLerpValues ();
 				animator.SetTrigger ("OnSteerLeft");
+				skidSound.pitch = Random.Range (0.8f, 1f);
+				skidSound.Play ();
 				leftSwipe.color = Color.clear;
 			} else if (Input.GetAxis ("Horizontal") > 0 && position > minPosition && timer >= inputDelay) {
 				position--;
 				timer = 0;
 				SetLerpValues ();
 				animator.SetTrigger ("OnSteerRight");
+				skidSound.pitch = Random.Range (0.8f, 1f);
+				skidSound.Play ();
 				rightSwipe.color = Color.clear;
 			}
 
@@ -70,12 +77,16 @@ public class PlayerController : MonoBehaviour {
 						position++;
 						SetLerpValues ();
 						animator.SetTrigger ("OnSteerLeft");
+						skidSound.pitch = Random.Range (0.8f, 1f);
+						skidSound.Play ();
 						leftSwipe.color = Color.clear;
 
 					} else if ((fp.x - lp.x) < -20 && position > minPosition) {
 						position--;
 						SetLerpValues ();
 						animator.SetTrigger ("OnSteerRight");
+						skidSound.pitch = Random.Range (0.8f, 1f);
+						skidSound.Play ();
 						rightSwipe.color = Color.clear;
 					}
 				}
@@ -87,11 +98,15 @@ public class PlayerController : MonoBehaviour {
 				timer = 0;
 				SetLerpValues ();
 				animator.SetTrigger ("OnSteerLeft");
+				skidSound.pitch = Random.Range (0.8f, 1f);
+				skidSound.Play ();
 			} else if (buttonPressDirection > 0 && position > minPosition && timer >= inputDelay) {
 				position--;
 				timer = 0;
 				SetLerpValues ();
 				animator.SetTrigger ("OnSteerRight");
+				skidSound.pitch = Random.Range (0.8f, 1f);
+				skidSound.Play ();
 			}
 		}
 
@@ -132,6 +147,8 @@ public class PlayerController : MonoBehaviour {
 			position--;
 			SetLerpValues ();
 			animator.SetTrigger ("OnSteerRight");
+			skidSound.pitch = Random.Range (0.8f, 1f);
+			skidSound.Play ();
 		}
 		maxPosition--;
 	}

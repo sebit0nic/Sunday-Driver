@@ -23,6 +23,8 @@ public class PlayerCollision : MonoBehaviour {
 	private Vector3 crashTextPos1, crashTextPos2, crashTextPos3;
 	private Vector3 crashTextScale1, crashTextScale2, crashTextScale3;
 
+	private AudioSource crashSound;
+
 	private void Start() {
 		playerController = GetComponent<PlayerController> ();
 		cameraController = GameObject.Find ("Main Camera").GetComponent<CameraController> ();
@@ -34,6 +36,8 @@ public class PlayerCollision : MonoBehaviour {
 		crashTextScale1 = new Vector3 (1f, 1f, 1f);
 		crashTextScale2 = new Vector3 (1.2f, 1.2f, 1.2f);
 		crashTextScale3 = new Vector3 (1.5f, 1.5f, 1.5f);
+
+		crashSound = GetComponents<AudioSource> () [0];
 	}
 
 	private void Update() {
@@ -70,6 +74,8 @@ public class PlayerCollision : MonoBehaviour {
 				crashAnimator.SetTrigger ("OnStart");
 				score.SetStopped ();
 				roadSpawner.ChangePitch (0.5f);
+				crashSound.pitch = Random.Range (0.8f, 1.2f);
+				crashSound.Play ();
 			}
 			Time.timeScale = 0.1f;
 			marker.SetActive (false);

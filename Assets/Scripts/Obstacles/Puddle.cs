@@ -8,10 +8,12 @@ public class Puddle : MonoBehaviour {
 	private bool playedOnce;
 	private BoxCollider thisBoxCollider;
 	private float timeout;
+	private AudioSource skidSound;
 
 	private void Awake() {
 		thisBoxCollider = GetComponent<BoxCollider> ();
 		psemit = particles.emission;
+		skidSound = GetComponent<AudioSource> ();
 	}
 		
 	private void Update() {
@@ -29,6 +31,7 @@ public class Puddle : MonoBehaviour {
 				particles.Play ();
 			}
 			playedOnce = true;
+			skidSound.Play ();
 			timeout = Time.time + 0.5f;
 			thisBoxCollider.enabled = false;
 		}

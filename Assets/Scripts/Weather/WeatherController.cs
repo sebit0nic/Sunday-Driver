@@ -11,6 +11,7 @@ public class WeatherController : MonoBehaviour {
 	private bool transitioning;
 	private Color tempColor;
 	private float tempIntensity;
+	private AudioSource rainSound, snowSound;
 
 	private void Awake() {
 		mainLight = GameObject.Find ("Directional Light").GetComponent<Light> ();
@@ -21,6 +22,9 @@ public class WeatherController : MonoBehaviour {
 		tempColor = Color.white;
 		tempIntensity = 1;
 		state = 0;
+
+		rainSound = GetComponents<AudioSource> () [0];
+		snowSound = GetComponents<AudioSource> () [1];
 	}
 
 	private void Update() {
@@ -47,6 +51,9 @@ public class WeatherController : MonoBehaviour {
 					mainLight.color = tempColor;
 					rain.gameObject.transform.position = Vector3.Lerp (rain.gameObject.transform.position, new Vector3 (-35, 20, -8f), Time.deltaTime * 0.5f);
 					rain.SetCanLightning (false);
+					if (rainSound.volume > 0) {
+						rainSound.volume -= Time.deltaTime / 2;
+					}
 					if (tempColor.r >= 1f) {
 						tempColor.r = 1f;
 						tempColor.g = 1f;
@@ -62,6 +69,9 @@ public class WeatherController : MonoBehaviour {
 					tempIntensity += Time.deltaTime * 0.4f;
 					mainLight.intensity = tempIntensity;
 					snow.transform.position = Vector3.Lerp (snow.transform.position, new Vector3 (-60, 21.3f, -2.9f), Time.deltaTime * 0.5f);
+					if (snowSound.volume > 0) {
+						snowSound.volume -= Time.deltaTime / 2;
+					}
 					if (tempIntensity >= 1f) {
 						tempIntensity = 1f;
 					}
@@ -81,6 +91,9 @@ public class WeatherController : MonoBehaviour {
 					mainLight.color = tempColor;
 					rain.gameObject.transform.position = Vector3.Lerp (rain.gameObject.transform.position, new Vector3 (-4, 20, -8f), Time.deltaTime * 0.5f);
 					rain.SetCanLightning (true);
+					if (rainSound.volume < 0.8f) {
+						rainSound.volume += Time.deltaTime/2;
+					}
 					if (tempColor.r <= 0.6f) {
 						tempColor.r = 0.6f;
 						tempColor.g = 0.6f;
@@ -95,6 +108,9 @@ public class WeatherController : MonoBehaviour {
 					tempIntensity += Time.deltaTime * 0.4f;
 					mainLight.intensity = tempIntensity;
 					snow.transform.position = Vector3.Lerp (snow.transform.position, new Vector3 (-60, 21.3f, -2.9f), Time.deltaTime * 0.5f);
+					if (snowSound.volume > 0) {
+						snowSound.volume -= Time.deltaTime / 2;
+					}
 					if (tempIntensity >= 1f) {
 						tempIntensity = 1f;
 					}
@@ -111,6 +127,9 @@ public class WeatherController : MonoBehaviour {
 					tempIntensity -= Time.deltaTime * 0.4f;
 					mainLight.intensity = tempIntensity;
 					snow.transform.position = Vector3.Lerp (snow.transform.position, new Vector3 (-8f, 3.8f, -7.4f), Time.deltaTime * 0.5f);
+					if (snowSound.volume < 0.8f) {
+						snowSound.volume += Time.deltaTime / 2;
+					}
 					if (tempIntensity <= 0.8f) {
 						tempIntensity = 0.8f;
 					}
@@ -126,6 +145,9 @@ public class WeatherController : MonoBehaviour {
 					mainLight.color = tempColor;
 					rain.gameObject.transform.position = Vector3.Lerp (rain.gameObject.transform.position, new Vector3 (-35, 20, -8f), Time.deltaTime * 0.5f);
 					rain.SetCanLightning (false);
+					if (rainSound.volume > 0) {
+						rainSound.volume -= Time.deltaTime/2;
+					}
 					if (tempColor.r >= 1f) {
 						tempColor.r = 1f;
 						tempColor.g = 1f;

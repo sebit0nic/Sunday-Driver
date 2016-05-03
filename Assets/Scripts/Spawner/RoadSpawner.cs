@@ -148,7 +148,7 @@ public class RoadSpawner : MonoBehaviour {
 	}
 
 	public void ChangeVolume(float newVolume) {
-		if (thisAudioSource.volume + newVolume <= 0.3f) {
+		if (thisAudioSource.volume + newVolume <= 0.2f) {
 			thisAudioSource.volume += newVolume;
 		}
 	}

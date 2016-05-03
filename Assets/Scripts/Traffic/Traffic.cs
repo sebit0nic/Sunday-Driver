@@ -12,9 +12,11 @@ public class Traffic : MonoBehaviour {
 	private Vector3 initialPosition;
 	private bool crashed;
 	private CapsuleCollider thisCollider;
+	private AudioSource crashSound;
 
 	private void Awake() {
 		thisCollider = GetComponent<CapsuleCollider> ();
+		crashSound = GetComponent<AudioSource> ();
 	}
 
 	private void Start() {
@@ -67,6 +69,10 @@ public class Traffic : MonoBehaviour {
 		if (coll.gameObject.tag.Equals ("Obstacle") || coll.gameObject.tag.Equals("Traffic")) {
 			crashParticles.gameObject.SetActive (true);
 			moveSpeed = 25;
+			if (transform.position.z < 2) {
+				crashSound.pitch = Random.Range (0.8f, 1.2f);
+				crashSound.Play ();
+			}
 		}
 	}
 }

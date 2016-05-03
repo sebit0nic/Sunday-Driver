@@ -5,9 +5,11 @@ public class FallenTree : MonoBehaviour {
 
 	private Animator thisAnimator;
 	private bool animatedOnce;
+	private AudioSource treeSound;
 
 	private void Awake() {
 		thisAnimator = GetComponent<Animator> ();
+		treeSound = GetComponent<AudioSource> ();
 	}
 
 	private void Update() {
@@ -17,6 +19,7 @@ public class FallenTree : MonoBehaviour {
 			} else {
 				thisAnimator.SetTrigger ("OnFallLeft");
 			}
+			treeSound.Play ();
 			animatedOnce = true;
 		}
 	}

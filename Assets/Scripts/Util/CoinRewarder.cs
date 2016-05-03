@@ -44,13 +44,13 @@ public class CoinRewarder : MonoBehaviour {
 			banner.SetActive (true);
 			bannerText.text = "Free Coins!";
 			freeButton.SetActive (true);
-			rewardedCoins = Random.Range (5, 12) * 10;
+			rewardedCoins = Random.Range (5, 11) * 10;
 			coinText.text = "+" + rewardedCoins;
 		} else if (nextAdTimestamp < System.DateTime.Now.Ticks / System.TimeSpan.TicksPerMillisecond) {
 			banner.SetActive (true);
 			bannerText.text = "Watch Ad. Get Coins!";
 			adButton.SetActive (true);
-			rewardedCoins = Random.Range (7, 14) * 10;
+			rewardedCoins = Random.Range (7, 11) * 10;
 			coinText.text = "+" + rewardedCoins;
 		}
 	}
